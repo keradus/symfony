@@ -14,7 +14,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Symfony\Bridge\Twig\Extension\ImportMapExtension;
 use Symfony\Bridge\Twig\Extension\ImportMapRuntime;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
 
         ->set('twig.runtime.importmap', ImportMapRuntime::class)

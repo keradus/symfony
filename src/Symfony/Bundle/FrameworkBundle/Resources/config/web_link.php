@@ -15,7 +15,7 @@ use Symfony\Component\WebLink\EventListener\AddLinkHeaderListener;
 use Symfony\Component\WebLink\HttpHeaderParser;
 use Symfony\Component\WebLink\HttpHeaderSerializer;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
 
         ->set('web_link.http_header_serializer', HttpHeaderSerializer::class)

@@ -72,7 +72,7 @@ use Symfony\Component\Validator\Command\DebugCommand as ValidatorDebugCommand;
 use Symfony\Component\Workflow\Command\WorkflowDumpCommand;
 use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('console.error_listener', ErrorListener::class)
             ->args([

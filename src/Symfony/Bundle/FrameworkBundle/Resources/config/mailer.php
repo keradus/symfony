@@ -28,7 +28,7 @@ use Symfony\Component\Mailer\Transport\Transports;
 use Symfony\Component\Mime\Crypto\DkimSigner;
 use Symfony\Component\Mime\Crypto\SMimeSigner;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('mailer.mailer', Mailer::class)
             ->args([

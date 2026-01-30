@@ -14,7 +14,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Symfony\Component\Semaphore\SemaphoreFactory;
 use Symfony\Component\Semaphore\Serializer\SemaphoreKeyNormalizer;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('semaphore.factory.abstract', SemaphoreFactory::class)->abstract()
             ->args([abstract_arg('Store')])

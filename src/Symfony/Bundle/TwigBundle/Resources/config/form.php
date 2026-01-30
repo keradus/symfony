@@ -15,7 +15,7 @@ use Symfony\Bridge\Twig\Extension\FormExtension;
 use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 use Symfony\Component\Form\FormRenderer;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('twig.extension.form', FormExtension::class)
             ->args([service('translator')->nullOnInvalid()])

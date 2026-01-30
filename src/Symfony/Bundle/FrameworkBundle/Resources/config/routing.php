@@ -40,7 +40,7 @@ use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RequestContextAwareInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->parameters()
         ->set('router.request_context.host', 'localhost')
         ->set('router.request_context.scheme', 'http')

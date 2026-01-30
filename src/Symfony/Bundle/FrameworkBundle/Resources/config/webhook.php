@@ -21,7 +21,7 @@ use Symfony\Component\Webhook\Server\NativeJsonPayloadSerializer;
 use Symfony\Component\Webhook\Server\SerializerPayloadSerializer;
 use Symfony\Component\Webhook\Server\Transport;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('webhook.transport', Transport::class)
             ->args([

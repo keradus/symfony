@@ -19,7 +19,7 @@ use Symfony\Component\Translation\Provider\NullProviderFactory;
 use Symfony\Component\Translation\Provider\TranslationProviderCollection;
 use Symfony\Component\Translation\Provider\TranslationProviderCollectionFactory;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('translation.provider_collection', TranslationProviderCollection::class)
             ->factory([service('translation.provider_collection_factory'), 'fromConfig'])

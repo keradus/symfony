@@ -51,7 +51,7 @@ use Symfony\Component\Translation\Writer\TranslationWriterInterface;
 use Symfony\Contracts\Translation\LocaleAwareInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('translator.default', Translator::class)
             ->args([

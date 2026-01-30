@@ -15,7 +15,7 @@ use Symfony\Bridge\Twig\Mime\BodyRenderer;
 use Symfony\Component\Mailer\EventListener\MessageListener;
 use Symfony\Component\Mime\BodyRendererInterface;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('twig.mailer.message_listener', MessageListener::class)
             ->args([null, service('twig.mime_body_renderer')])

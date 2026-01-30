@@ -24,7 +24,7 @@ use Symfony\Component\HttpClient\Retry\GenericRetryStrategy;
 use Symfony\Component\HttpClient\UriTemplateHttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('cache.http_client.pool')
             ->parent('cache.app')

@@ -50,7 +50,7 @@ use Symfony\Component\Messenger\Transport\Sync\SyncTransportFactory;
 use Symfony\Component\Messenger\Transport\TransportFactory;
 use Symfony\Component\String\LazyString;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         // Asynchronous
         ->set('messenger.senders_locator', SendersLocator::class)

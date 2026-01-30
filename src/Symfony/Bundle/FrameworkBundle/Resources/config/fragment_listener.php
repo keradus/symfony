@@ -13,7 +13,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Component\HttpKernel\EventListener\FragmentListener;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('fragment.listener', FragmentListener::class)
             ->args([service('uri_signer'), param('fragment.path')])

@@ -13,7 +13,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('form.type_extension.csrf', FormTypeCsrfExtension::class)
             ->args([

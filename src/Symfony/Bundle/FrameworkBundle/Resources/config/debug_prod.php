@@ -15,7 +15,7 @@ use Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter;
 use Symfony\Component\HttpKernel\Debug\ErrorHandlerConfigurator;
 use Symfony\Component\HttpKernel\EventListener\DebugHandlersListener;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->parameters()->set('debug.error_handler.throw_at', -1);
 
     $container->services()

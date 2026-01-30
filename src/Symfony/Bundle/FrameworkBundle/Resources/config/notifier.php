@@ -36,7 +36,7 @@ use Symfony\Component\Notifier\TexterInterface;
 use Symfony\Component\Notifier\Transport;
 use Symfony\Component\Notifier\Transport\Transports;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('notifier', Notifier::class)
             ->args([tagged_locator('notifier.channel', 'channel'), service('notifier.channel_policy')->ignoreOnInvalid()])

@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryData
 use Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension;
 use Symfony\Component\Form\ResolvedFormTypeFactory;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('form.resolved_type_factory', ResolvedTypeFactoryDataCollectorProxy::class)
             ->args([

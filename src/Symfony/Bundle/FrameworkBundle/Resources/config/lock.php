@@ -16,7 +16,7 @@ use Symfony\Component\Lock\Serializer\LockKeyNormalizer;
 use Symfony\Component\Lock\Store\CombinedStore;
 use Symfony\Component\Lock\Strategy\ConsensusStrategy;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('lock.store.combined.abstract', CombinedStore::class)->abstract()
             ->args([abstract_arg('List of stores'), service('lock.strategy.majority')])

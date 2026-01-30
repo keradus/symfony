@@ -50,7 +50,7 @@ use Symfony\Component\AssetMapper\MapperAwareAssetPackage;
 use Symfony\Component\AssetMapper\Path\LocalPublicAssetsFilesystem;
 use Symfony\Component\AssetMapper\Path\PublicAssetsPathResolver;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('asset_mapper', AssetMapper::class)
             ->args([

@@ -21,7 +21,7 @@ use Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension;
 use Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
 
         ->set('web_profiler.controller.profiler', ProfilerController::class)

@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Fragment\HIncludeFragmentRenderer;
 use Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer;
 use Symfony\Component\HttpKernel\Fragment\SsiFragmentRenderer;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->parameters()
         ->set('fragment.renderer.hinclude.global_template', null)
         ->set('fragment.path', '/_fragment')

@@ -13,7 +13,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('cache.rate_limiter')
             ->parent('cache.app')

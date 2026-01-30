@@ -13,7 +13,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Component\Messenger\DataCollector\MessengerDataCollector;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('data_collector.messenger', MessengerDataCollector::class)
             ->tag('data_collector', [

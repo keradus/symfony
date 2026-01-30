@@ -36,7 +36,7 @@ use Symfony\Component\Mailer\Bridge\Sendgrid\Webhook\SendgridRequestParser;
 use Symfony\Component\Mailer\Bridge\Sweego\RemoteEvent\SweegoPayloadConverter;
 use Symfony\Component\Mailer\Bridge\Sweego\Webhook\SweegoRequestParser;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('mailer.payload_converter.brevo', BrevoPayloadConverter::class)
         ->set('mailer.webhook.request_parser.brevo', BrevoRequestParser::class)

@@ -58,7 +58,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Workflow\WorkflowEvents;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     // this parameter is used at compile time in RegisterListenersPass
     $container->parameters()->set('event_dispatcher.event_aliases', array_merge(
         class_exists(ConsoleEvents::class) ? ConsoleEvents::ALIASES : [],

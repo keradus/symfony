@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\ValidatorBuilder;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->parameters()
         ->set('validator.mapping.cache.file', '%kernel.build_dir%/validation.php');
 

@@ -13,7 +13,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
 
         ->set('web_profiler.debug_toolbar', WebDebugToolbarListener::class)
