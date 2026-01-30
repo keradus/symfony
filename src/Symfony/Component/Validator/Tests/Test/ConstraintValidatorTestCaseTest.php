@@ -25,7 +25,7 @@ class ConstraintValidatorTestCaseTest extends ConstraintValidatorTestCase
         return new TestCustomValidator();
     }
 
-    public function testAssertingContextualValidatorRemainingExpectationsThrow()
+    public function testAssertingContextualValidatorRemainingExpectationsThrow(): void
     {
         $this->expectValidateValueAt(0, 'k1', 'ccc', [
             new NotNull(),

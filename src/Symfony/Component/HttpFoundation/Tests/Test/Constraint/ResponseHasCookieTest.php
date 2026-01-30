@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Test\Constraint\ResponseHasCookie;
 
 class ResponseHasCookieTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $response = new Response();
         $response->headers->setCookie(Cookie::create('foo', 'bar'));

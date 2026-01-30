@@ -20,7 +20,7 @@ class VarDumperTestTraitTest extends TestCase
 {
     use VarDumperTestTrait;
 
-    public function testItComparesLargeData()
+    public function testItComparesLargeData(): void
     {
         $howMany = 700;
         $data = array_fill_keys(range(0, $howMany), ['a', 'b', 'c', 'd']);
@@ -41,12 +41,12 @@ class VarDumperTestTraitTest extends TestCase
         $this->assertDumpEquals($expected, $data);
     }
 
-    public function testAllowsNonScalarExpectation()
+    public function testAllowsNonScalarExpectation(): void
     {
         $this->assertDumpEquals(new \ArrayObject(['bim' => 'bam']), new \ArrayObject(['bim' => 'bam']));
     }
 
-    public function testItCanBeConfigured()
+    public function testItCanBeConfigured(): void
     {
         $this->setUpVarDumper($casters = [
             \DateTimeInterface::class => static function (\DateTimeInterface $date, array $a, Stub $stub): array {

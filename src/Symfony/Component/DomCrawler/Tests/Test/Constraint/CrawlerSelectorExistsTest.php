@@ -18,7 +18,7 @@ use Symfony\Component\DomCrawler\Test\Constraint\CrawlerSelectorExists;
 
 class CrawlerSelectorExistsTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new CrawlerSelectorExists('title');
         $this->assertTrue($constraint->evaluate(new Crawler('<html><head><title>'), '', true));

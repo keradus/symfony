@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Test\Constraint\ResponseHeaderLocationSame;
 class ResponseHeaderLocationSameTest extends TestCase
 {
     #[DataProvider('provideSuccessCases')]
-    public function testConstraintSuccess(string $requestUrl, ?string $location, string $expectedLocation)
+    public function testConstraintSuccess(string $requestUrl, ?string $location, string $expectedLocation): void
     {
         $request = Request::create($requestUrl);
 
@@ -91,7 +91,7 @@ class ResponseHeaderLocationSameTest extends TestCase
     }
 
     #[DataProvider('provideFailureCases')]
-    public function testConstraintFailure(string $requestUrl, ?string $location, string $expectedLocation)
+    public function testConstraintFailure(string $requestUrl, ?string $location, string $expectedLocation): void
     {
         $request = Request::create($requestUrl);
 

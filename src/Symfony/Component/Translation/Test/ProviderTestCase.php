@@ -46,11 +46,8 @@ abstract class ProviderTestCase extends TestCase
      */
     abstract public static function toStringProvider(): iterable;
 
-    /**
-     * @dataProvider toStringProvider
-     */
     #[DataProvider('toStringProvider')]
-    public function testToString(ProviderInterface $provider, string $expected)
+    public function testToString(ProviderInterface $provider, string $expected): void
     {
         $this->assertSame($expected, (string) $provider);
     }

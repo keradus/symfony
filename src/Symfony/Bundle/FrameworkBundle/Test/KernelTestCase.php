@@ -135,7 +135,7 @@ abstract class KernelTestCase extends TestCase
     /**
      * Shuts the kernel down if it was used in the test - called by the tearDown method by default.
      */
-    protected static function ensureKernelShutdown()
+    protected static function ensureKernelShutdown(): void
     {
         if (null !== static::$kernel) {
             static::$kernel->boot();

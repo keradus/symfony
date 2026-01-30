@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsUnprocessable;
 
 class ResponseIsUnprocessableTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new ResponseIsUnprocessable();
 
@@ -31,7 +31,7 @@ class ResponseIsUnprocessableTest extends TestCase
         $constraint->evaluate(new Response('Response body'));
     }
 
-    public function testReducedVerbosity()
+    public function testReducedVerbosity(): void
     {
         $constraint = new ResponseIsUnprocessable(verbose: false);
 

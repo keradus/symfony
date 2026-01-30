@@ -18,14 +18,14 @@ use Symfony\Component\Mime\Test\Constraint\EmailAttachmentCount;
 
 class EmailAttachmentCountTest extends TestCase
 {
-    public function testToString()
+    public function testToString(): void
     {
         $constraint = new EmailAttachmentCount(1);
 
         $this->assertSame('has sent "1" attachment(s)', $constraint->toString());
     }
 
-    public function testFailureDescription()
+    public function testFailureDescription(): void
     {
         $email = new Email();
         $email->attach('attachment content', 'attachment.txt');

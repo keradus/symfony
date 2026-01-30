@@ -25,7 +25,7 @@ class HarFileResponseFactoryTest extends TestCase
         $this->fixtureDir = \dirname(__DIR__).'/Fixtures/har';
     }
 
-    public function testResponseGeneration()
+    public function testResponseGeneration(): void
     {
         $factory = new HarFileResponseFactory("{$this->fixtureDir}/symfony.com_archive.har");
         $client = new MockHttpClient($factory, 'https://symfony.com');
@@ -41,7 +41,7 @@ class HarFileResponseFactoryTest extends TestCase
         $this->assertArrayHasKey('symfony_versions', $body);
     }
 
-    public function testResponseGenerationWithPayload()
+    public function testResponseGenerationWithPayload(): void
     {
         $factory = new HarFileResponseFactory("{$this->fixtureDir}/graphql.github.io_archive.har");
         $client = new MockHttpClient($factory, 'https://swapi-graphql.netlify.app');
@@ -70,7 +70,7 @@ class HarFileResponseFactoryTest extends TestCase
         $this->assertArrayHasKey('allFilms', $body['data']);
     }
 
-    public function testFactoryThrowsWhenUnableToMatchResponse()
+    public function testFactoryThrowsWhenUnableToMatchResponse(): void
     {
         $this->expectException(TransportException::class);
         $factory = new HarFileResponseFactory("{$this->fixtureDir}/symfony.com_archive.har");
@@ -79,7 +79,7 @@ class HarFileResponseFactoryTest extends TestCase
         $client->request('GET', '/not-found');
     }
 
-    public function testFactoryThrowsWhenJsonIsInvalid()
+    public function testFactoryThrowsWhenJsonIsInvalid(): void
     {
         $this->expectException(\JsonException::class);
         $factory = new HarFileResponseFactory("{$this->fixtureDir}/invalid_archive.har");

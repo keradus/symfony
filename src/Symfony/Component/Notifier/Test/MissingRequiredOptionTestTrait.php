@@ -26,7 +26,7 @@ trait MissingRequiredOptionTestTrait
      * @dataProvider missingRequiredOptionProvider
      */
     #[DataProvider('missingRequiredOptionProvider')]
-    public function testMissingRequiredOptionException(string $dsn, ?string $message = null)
+    public function testMissingRequiredOptionException(string $dsn, ?string $message = null): void
     {
         $factory = $this->createFactory();
 

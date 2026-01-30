@@ -46,7 +46,7 @@ class KernelTestCaseHttpCacheTest extends KernelTestCase
         return new HttpCacheTestKernel(self::$baseDir, $options['environment'] ?? 'test', $options['debug'] ?? true);
     }
 
-    public function testHttpCacheIsClearedBetweenKernelShutdowns()
+    public function testHttpCacheIsClearedBetweenKernelShutdowns(): void
     {
         DynamicHttpKernel::$counter = 0;
 

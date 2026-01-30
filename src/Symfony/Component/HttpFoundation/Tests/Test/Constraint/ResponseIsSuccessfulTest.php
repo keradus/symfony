@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsSuccessful;
 
 class ResponseIsSuccessfulTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new ResponseIsSuccessful();
 
@@ -31,7 +31,7 @@ class ResponseIsSuccessfulTest extends TestCase
         $constraint->evaluate(new Response('Response body', 404));
     }
 
-    public function testReducedVerbosity()
+    public function testReducedVerbosity(): void
     {
         $constraint = new ResponseIsSuccessful(verbose: false);
 

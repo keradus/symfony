@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class WebTestCaseTest extends TestCase
 {
-    public function testAssertResponseIsSuccessful()
+    public function testAssertResponseIsSuccessful(): void
     {
         $this->getResponseTester(new Response())->assertResponseIsSuccessful();
         $this->expectException(AssertionFailedError::class);
@@ -37,7 +37,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response('', 404))->assertResponseIsSuccessful();
     }
 
-    public function testAssertResponseStatusCodeSame()
+    public function testAssertResponseStatusCodeSame(): void
     {
         $this->getResponseTester(new Response())->assertResponseStatusCodeSame(200);
         $this->getResponseTester(new Response('', 404))->assertResponseStatusCodeSame(404);
@@ -46,7 +46,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response('', 404))->assertResponseStatusCodeSame(200);
     }
 
-    public function testAssertResponseRedirects()
+    public function testAssertResponseRedirects(): void
     {
         $this->getResponseTester(new Response('', 301))->assertResponseRedirects();
         $this->expectException(AssertionFailedError::class);
@@ -54,7 +54,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response())->assertResponseRedirects();
     }
 
-    public function testAssertResponseRedirectsWithLocation()
+    public function testAssertResponseRedirectsWithLocation(): void
     {
         $this->getResponseTester(new Response('', 301, ['Location' => 'https://example.com/']))->assertResponseRedirects('https://example.com/');
         $this->expectException(AssertionFailedError::class);
@@ -62,7 +62,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response('', 301))->assertResponseRedirects('https://example.com/');
     }
 
-    public function testAssertResponseRedirectsWithLocationWithoutHost()
+    public function testAssertResponseRedirectsWithLocationWithoutHost(): void
     {
         $this->getResponseTester(new Response('', 301, ['Location' => 'https://example.com/']))->assertResponseRedirects('/');
         $this->expectException(AssertionFailedError::class);
@@ -70,7 +70,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response('', 301))->assertResponseRedirects('/');
     }
 
-    public function testAssertResponseRedirectsWithLocationWithoutScheme()
+    public function testAssertResponseRedirectsWithLocationWithoutScheme(): void
     {
         $this->getResponseTester(new Response('', 301, ['Location' => 'https://example.com/']))->assertResponseRedirects('//example.com/');
         $this->expectException(AssertionFailedError::class);
@@ -78,7 +78,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response('', 301))->assertResponseRedirects('//example.com/');
     }
 
-    public function testAssertResponseRedirectsWithStatusCode()
+    public function testAssertResponseRedirectsWithStatusCode(): void
     {
         $this->getResponseTester(new Response('', 302))->assertResponseRedirects(null, 302);
         $this->expectException(AssertionFailedError::class);
@@ -86,7 +86,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response('', 302))->assertResponseRedirects(null, 301);
     }
 
-    public function testAssertResponseRedirectsWithLocationAndStatusCode()
+    public function testAssertResponseRedirectsWithLocationAndStatusCode(): void
     {
         $this->getResponseTester(new Response('', 302, ['Location' => 'https://example.com/']))->assertResponseRedirects('https://example.com/', 302);
         $this->expectException(AssertionFailedError::class);
@@ -94,7 +94,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response('', 302))->assertResponseRedirects('https://example.com/', 301);
     }
 
-    public function testAssertResponseFormat()
+    public function testAssertResponseFormat(): void
     {
         $this->getResponseTester(new Response('', 200, ['Content-Type' => 'application/vnd.myformat']))->assertResponseFormatSame('custom');
         $this->getResponseTester(new Response('', 200, ['Content-Type' => 'application/ld+json']))->assertResponseFormatSame('jsonld');
@@ -104,7 +104,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response())->assertResponseFormatSame('jsonld');
     }
 
-    public function testAssertResponseHasHeader()
+    public function testAssertResponseHasHeader(): void
     {
         $this->getResponseTester(new Response())->assertResponseHasHeader('Date');
         $this->expectException(AssertionFailedError::class);
@@ -112,7 +112,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response())->assertResponseHasHeader('X-Date');
     }
 
-    public function testAssertResponseNotHasHeader()
+    public function testAssertResponseNotHasHeader(): void
     {
         $this->getResponseTester(new Response())->assertResponseNotHasHeader('X-Date');
         $this->expectException(AssertionFailedError::class);
@@ -120,7 +120,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response())->assertResponseNotHasHeader('Date');
     }
 
-    public function testAssertResponseHeaderSame()
+    public function testAssertResponseHeaderSame(): void
     {
         $this->getResponseTester(new Response())->assertResponseHeaderSame('Cache-Control', 'no-cache, private');
         $this->expectException(AssertionFailedError::class);
@@ -128,7 +128,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response())->assertResponseHeaderSame('Cache-Control', 'public');
     }
 
-    public function testAssertResponseHeaderNotSame()
+    public function testAssertResponseHeaderNotSame(): void
     {
         $this->getResponseTester(new Response())->assertResponseHeaderNotSame('Cache-Control', 'public');
         $this->expectException(AssertionFailedError::class);
@@ -136,7 +136,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester(new Response())->assertResponseHeaderNotSame('Cache-Control', 'no-cache, private');
     }
 
-    public function testAssertResponseHasCookie()
+    public function testAssertResponseHasCookie(): void
     {
         $response = new Response();
         $response->headers->setCookie(HttpFoundationCookie::create('foo', 'bar'));
@@ -147,7 +147,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester($response)->assertResponseHasCookie('bar');
     }
 
-    public function testAssertResponseNotHasCookie()
+    public function testAssertResponseNotHasCookie(): void
     {
         $response = new Response();
         $response->headers->setCookie(HttpFoundationCookie::create('foo', 'bar'));
@@ -158,7 +158,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester($response)->assertResponseNotHasCookie('foo');
     }
 
-    public function testAssertResponseCookieValueSame()
+    public function testAssertResponseCookieValueSame(): void
     {
         $response = new Response();
         $response->headers->setCookie(HttpFoundationCookie::create('foo', 'bar'));
@@ -169,7 +169,7 @@ class WebTestCaseTest extends TestCase
         $this->getResponseTester($response)->assertResponseCookieValueSame('bar', 'bar');
     }
 
-    public function testAssertBrowserHasCookie()
+    public function testAssertBrowserHasCookie(): void
     {
         $this->getClientTester()->assertBrowserHasCookie('foo', '/path');
         $this->expectException(AssertionFailedError::class);
@@ -177,7 +177,7 @@ class WebTestCaseTest extends TestCase
         $this->getClientTester()->assertBrowserHasCookie('bar');
     }
 
-    public function testAssertBrowserNotHasCookie()
+    public function testAssertBrowserNotHasCookie(): void
     {
         $this->getClientTester()->assertBrowserNotHasCookie('bar');
         $this->expectException(AssertionFailedError::class);
@@ -185,7 +185,7 @@ class WebTestCaseTest extends TestCase
         $this->getClientTester()->assertBrowserNotHasCookie('foo', '/path');
     }
 
-    public function testAssertBrowserCookieValueSame()
+    public function testAssertBrowserCookieValueSame(): void
     {
         $this->getClientTester()->assertBrowserCookieValueSame('foo', 'bar', false, '/path');
         $this->expectException(AssertionFailedError::class);
@@ -194,7 +194,7 @@ class WebTestCaseTest extends TestCase
     }
 
     #[RequiresMethod(History::class, 'isFirstPage')]
-    public function testAssertBrowserHistoryIsOnFirstPage()
+    public function testAssertBrowserHistoryIsOnFirstPage(): void
     {
         $this->createHistoryTester('isFirstPage', true)->assertBrowserHistoryIsOnFirstPage();
         $this->expectException(AssertionFailedError::class);
@@ -203,7 +203,7 @@ class WebTestCaseTest extends TestCase
     }
 
     #[RequiresMethod(History::class, 'isFirstPage')]
-    public function testAssertBrowserHistoryIsNotOnFirstPage()
+    public function testAssertBrowserHistoryIsNotOnFirstPage(): void
     {
         $this->createHistoryTester('isFirstPage', false)->assertBrowserHistoryIsNotOnFirstPage();
         $this->expectException(AssertionFailedError::class);
@@ -212,7 +212,7 @@ class WebTestCaseTest extends TestCase
     }
 
     #[RequiresMethod(History::class, 'isLastPage')]
-    public function testAssertBrowserHistoryIsOnLastPage()
+    public function testAssertBrowserHistoryIsOnLastPage(): void
     {
         $this->createHistoryTester('isLastPage', true)->assertBrowserHistoryIsOnLastPage();
         $this->expectException(AssertionFailedError::class);
@@ -221,7 +221,7 @@ class WebTestCaseTest extends TestCase
     }
 
     #[RequiresMethod(History::class, 'isLastPage')]
-    public function testAssertBrowserHistoryIsNotOnLastPage()
+    public function testAssertBrowserHistoryIsNotOnLastPage(): void
     {
         $this->createHistoryTester('isLastPage', false)->assertBrowserHistoryIsNotOnLastPage();
         $this->expectException(AssertionFailedError::class);
@@ -229,7 +229,7 @@ class WebTestCaseTest extends TestCase
         $this->createHistoryTester('isLastPage', true)->assertBrowserHistoryIsNotOnLastPage();
     }
 
-    public function testAssertSelectorExists()
+    public function testAssertSelectorExists(): void
     {
         $this->getCrawlerTester(new Crawler('<html><body><h1>'))->assertSelectorExists('body > h1');
         $this->expectException(AssertionFailedError::class);
@@ -237,7 +237,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><head><title>Foo'))->assertSelectorExists('body > h1');
     }
 
-    public function testAssertSelectorNotExists()
+    public function testAssertSelectorNotExists(): void
     {
         $this->getCrawlerTester(new Crawler('<html><head><title>Foo'))->assertSelectorNotExists('body > h1');
         $this->expectException(AssertionFailedError::class);
@@ -245,7 +245,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><body><h1>'))->assertSelectorNotExists('body > h1');
     }
 
-    public function testAssertSelectorCount()
+    public function testAssertSelectorCount(): void
     {
         $this->getCrawlerTester(new Crawler('<html><body><p>Hello</p></body></html>'))->assertSelectorCount(1, 'p');
         $this->getCrawlerTester(new Crawler('<html><body><p>Hello</p><p>Foo</p></body></html>'))->assertSelectorCount(2, 'p');
@@ -255,7 +255,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><body><p>Hello</p></body></html>'))->assertSelectorCount(0, 'p');
     }
 
-    public function testAssertSelectorTextNotContains()
+    public function testAssertSelectorTextNotContains(): void
     {
         $this->getCrawlerTester(new Crawler('<html><body><h1>Foo'))->assertSelectorTextNotContains('body > h1', 'Bar');
         $this->expectException(AssertionFailedError::class);
@@ -263,7 +263,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><body><h1>Foo'))->assertSelectorTextNotContains('body > h1', 'Foo');
     }
 
-    public function testAssertAnySelectorTextContains()
+    public function testAssertAnySelectorTextContains(): void
     {
         $this->getCrawlerTester(new Crawler('<ul><li>Bar</li><li>Foo Baz'))->assertAnySelectorTextContains('ul li', 'Foo');
         $this->expectException(AssertionFailedError::class);
@@ -271,7 +271,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<ul><li>Bar</li><li>Baz'))->assertAnySelectorTextContains('ul li', 'Foo');
     }
 
-    public function testAssertAnySelectorTextSame()
+    public function testAssertAnySelectorTextSame(): void
     {
         $this->getCrawlerTester(new Crawler('<ul><li>Bar</li><li>Foo'))->assertAnySelectorTextSame('ul li', 'Foo');
         $this->expectException(AssertionFailedError::class);
@@ -279,7 +279,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<ul><li>Bar</li><li>Baz'))->assertAnySelectorTextSame('ul li', 'Foo');
     }
 
-    public function testAssertAnySelectorTextNotContains()
+    public function testAssertAnySelectorTextNotContains(): void
     {
         $this->getCrawlerTester(new Crawler('<ul><li>Bar</li><li>Baz'))->assertAnySelectorTextNotContains('ul li', 'Foo');
         $this->expectException(AssertionFailedError::class);
@@ -287,7 +287,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<ul><li>Bar</li><li>Foo'))->assertAnySelectorTextNotContains('ul li', 'Foo');
     }
 
-    public function testAssertPageTitleSame()
+    public function testAssertPageTitleSame(): void
     {
         $this->getCrawlerTester(new Crawler('<html><head><title>Foo'))->assertPageTitleSame('Foo');
         $this->expectException(AssertionFailedError::class);
@@ -295,7 +295,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><head><title>Foo'))->assertPageTitleSame('Bar');
     }
 
-    public function testAssertPageTitleContains()
+    public function testAssertPageTitleContains(): void
     {
         $this->getCrawlerTester(new Crawler('<html><head><title>Foobar'))->assertPageTitleContains('Foo');
         $this->expectException(AssertionFailedError::class);
@@ -303,7 +303,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><head><title>Foo'))->assertPageTitleContains('Bar');
     }
 
-    public function testAssertInputValueSame()
+    public function testAssertInputValueSame(): void
     {
         $this->getCrawlerTester(new Crawler('<html><body><form><input type="text" name="username" value="Fabien">'))->assertInputValueSame('username', 'Fabien');
         $this->expectException(AssertionFailedError::class);
@@ -311,7 +311,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><head><title>Foo'))->assertInputValueSame('password', 'pa$$');
     }
 
-    public function testAssertInputValueNotSame()
+    public function testAssertInputValueNotSame(): void
     {
         $this->getCrawlerTester(new Crawler('<html><body><input type="text" name="username" value="Helene">'))->assertInputValueNotSame('username', 'Fabien');
         $this->expectException(AssertionFailedError::class);
@@ -319,7 +319,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><body><form><input type="text" name="password" value="pa$$">'))->assertInputValueNotSame('password', 'pa$$');
     }
 
-    public function testAssertCheckboxChecked()
+    public function testAssertCheckboxChecked(): void
     {
         $this->getCrawlerTester(new Crawler('<html><body><form><input type="checkbox" name="rememberMe" checked>'))->assertCheckboxChecked('rememberMe');
         $this->getCrawlerTester(new Crawler('<!DOCTYPE html><body><form><input type="checkbox" name="rememberMe" checked>'))->assertCheckboxChecked('rememberMe');
@@ -328,7 +328,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><body><form><input type="checkbox" name="rememberMe">'))->assertCheckboxChecked('rememberMe');
     }
 
-    public function testAssertCheckboxNotChecked()
+    public function testAssertCheckboxNotChecked(): void
     {
         $this->getCrawlerTester(new Crawler('<html><body><form><input type="checkbox" name="rememberMe">'))->assertCheckboxNotChecked('rememberMe');
         $this->getCrawlerTester(new Crawler('<!DOCTYPE html><body><form><input type="checkbox" name="rememberMe">'))->assertCheckboxNotChecked('rememberMe');
@@ -337,7 +337,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><body><form><input type="checkbox" name="rememberMe" checked>'))->assertCheckboxNotChecked('rememberMe');
     }
 
-    public function testAssertFormValue()
+    public function testAssertFormValue(): void
     {
         $this->getCrawlerTester(new Crawler('<html><body><form id="form"><input type="text" name="username" value="Fabien">', 'http://localhost'))->assertFormValue('#form', 'username', 'Fabien');
         $this->expectException(AssertionFailedError::class);
@@ -345,7 +345,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><body><form id="form"><input type="text" name="username" value="Fabien">', 'http://localhost'))->assertFormValue('#form', 'username', 'Jane');
     }
 
-    public function testAssertNoFormValue()
+    public function testAssertNoFormValue(): void
     {
         $this->getCrawlerTester(new Crawler('<html><body><form id="form"><input type="checkbox" name="rememberMe">', 'http://localhost'))->assertNoFormValue('#form', 'rememberMe');
         $this->expectException(AssertionFailedError::class);
@@ -353,7 +353,7 @@ class WebTestCaseTest extends TestCase
         $this->getCrawlerTester(new Crawler('<html><body><form id="form"><input type="checkbox" name="rememberMe" checked>', 'http://localhost'))->assertNoFormValue('#form', 'rememberMe');
     }
 
-    public function testAssertRequestAttributeValueSame()
+    public function testAssertRequestAttributeValueSame(): void
     {
         $this->getRequestTester()->assertRequestAttributeValueSame('foo', 'bar');
         $this->expectException(AssertionFailedError::class);
@@ -361,7 +361,7 @@ class WebTestCaseTest extends TestCase
         $this->getRequestTester()->assertRequestAttributeValueSame('foo', 'baz');
     }
 
-    public function testAssertRouteSame()
+    public function testAssertRouteSame(): void
     {
         $this->getRequestTester()->assertRouteSame('homepage', ['foo' => 'bar']);
         $this->expectException(AssertionFailedError::class);
@@ -369,7 +369,7 @@ class WebTestCaseTest extends TestCase
         $this->getRequestTester()->assertRouteSame('articles');
     }
 
-    public function testExceptionOnServerError()
+    public function testExceptionOnServerError(): void
     {
         try {
             $this->getResponseTester(new Response('', 500, ['X-Debug-Exception' => 'An exception has occurred', 'X-Debug-Exception-File' => '%2Fsrv%2Ftest.php:12']))->assertResponseIsSuccessful();

@@ -20,7 +20,7 @@ use Symfony\Component\BrowserKit\Test\Constraint\BrowserCookieValueSame;
 
 class BrowserCookieValueSameTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $browser = $this->getBrowser();
         $constraint = new BrowserCookieValueSame('foo', 'bar', false, '/path');

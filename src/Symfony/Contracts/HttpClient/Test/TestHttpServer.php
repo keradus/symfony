@@ -35,7 +35,7 @@ class TestHttpServer
         if (isset(self::$process[$port])) {
             self::$process[$port]->stop();
         } else {
-            register_shutdown_function(static function () use ($port) {
+            register_shutdown_function(static function () use ($port): void {
                 self::$process[$port]->stop();
             });
         }
@@ -53,7 +53,7 @@ class TestHttpServer
         return $process;
     }
 
-    public static function stop(int $port = 8057)
+    public static function stop(int $port = 8057): void
     {
         if (isset(self::$process[$port])) {
             self::$process[$port]->stop();

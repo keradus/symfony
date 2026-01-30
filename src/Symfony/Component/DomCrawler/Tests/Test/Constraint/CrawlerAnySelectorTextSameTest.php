@@ -18,7 +18,7 @@ use Symfony\Component\DomCrawler\Test\Constraint\CrawlerAnySelectorTextSame;
 
 final class CrawlerAnySelectorTextSameTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new CrawlerAnySelectorTextSame('ul li', 'Foo');
 

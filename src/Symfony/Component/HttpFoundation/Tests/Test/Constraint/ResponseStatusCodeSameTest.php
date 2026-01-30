@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Test\Constraint\ResponseStatusCodeSame;
 
 class ResponseStatusCodeSameTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new ResponseStatusCodeSame(200);
         $this->assertTrue($constraint->evaluate(new Response(), '', true));
@@ -34,7 +34,7 @@ class ResponseStatusCodeSameTest extends TestCase
         $constraint->evaluate(new Response('Response body', 404));
     }
 
-    public function testReducedVerbosity()
+    public function testReducedVerbosity(): void
     {
         $constraint = new ResponseStatusCodeSame(200, verbose: false);
 

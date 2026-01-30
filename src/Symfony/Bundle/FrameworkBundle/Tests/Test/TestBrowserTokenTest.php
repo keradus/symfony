@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken;
 
 final class TestBrowserTokenTest extends TestCase
 {
-    public function testCanBeSerializedAndUnserialized()
+    public function testCanBeSerializedAndUnserialized(): void
     {
         $token = unserialize(serialize(new TestBrowserToken()));
 

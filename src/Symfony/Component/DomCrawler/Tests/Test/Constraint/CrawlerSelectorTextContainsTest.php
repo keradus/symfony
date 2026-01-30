@@ -18,7 +18,7 @@ use Symfony\Component\DomCrawler\Test\Constraint\CrawlerSelectorTextContains;
 
 class CrawlerSelectorTextContainsTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new CrawlerSelectorTextContains('title', 'Foo');
         $this->assertTrue($constraint->evaluate(new Crawler('<html><head><title>Foobar'), '', true));
@@ -26,7 +26,7 @@ class CrawlerSelectorTextContainsTest extends TestCase
         $this->assertFalse($constraint->evaluate(new Crawler('<html><head></head><body>Bar'), '', true));
     }
 
-    public function testDoesNotMatchIfNodeTextIsNotExpectedValue()
+    public function testDoesNotMatchIfNodeTextIsNotExpectedValue(): void
     {
         $constraint = new CrawlerSelectorTextContains('title', 'Foo');
 
@@ -36,7 +36,7 @@ class CrawlerSelectorTextContainsTest extends TestCase
         $constraint->evaluate(new Crawler('<html><head><title>Bar'));
     }
 
-    public function testDoesNotMatchIfNodeDoesNotExist()
+    public function testDoesNotMatchIfNodeDoesNotExist(): void
     {
         $constraint = new CrawlerSelectorTextContains('title', 'Foo');
 

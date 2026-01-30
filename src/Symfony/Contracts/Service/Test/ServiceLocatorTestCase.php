@@ -29,7 +29,7 @@ abstract class ServiceLocatorTestCase extends TestCase
         };
     }
 
-    public function testHas()
+    public function testHas(): void
     {
         $locator = $this->getServiceLocator([
             'foo' => static fn () => 'bar',
@@ -42,7 +42,7 @@ abstract class ServiceLocatorTestCase extends TestCase
         $this->assertFalse($locator->has('dummy'));
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $locator = $this->getServiceLocator([
             'foo' => static fn () => 'bar',
@@ -53,7 +53,7 @@ abstract class ServiceLocatorTestCase extends TestCase
         $this->assertSame('baz', $locator->get('bar'));
     }
 
-    public function testGetDoesNotMemoize()
+    public function testGetDoesNotMemoize(): void
     {
         $i = 0;
         $locator = $this->getServiceLocator([
@@ -69,7 +69,7 @@ abstract class ServiceLocatorTestCase extends TestCase
         $this->assertSame(2, $i);
     }
 
-    public function testThrowsOnUndefinedInternalService()
+    public function testThrowsOnUndefinedInternalService(): void
     {
         $locator = $this->getServiceLocator([
             'foo' => static function () use (&$locator) { return $locator->get('bar'); },
@@ -81,7 +81,7 @@ abstract class ServiceLocatorTestCase extends TestCase
         $locator->get('foo');
     }
 
-    public function testThrowsOnCircularReference()
+    public function testThrowsOnCircularReference(): void
     {
         $locator = $this->getServiceLocator([
             'foo' => static function () use (&$locator) { return $locator->get('bar'); },

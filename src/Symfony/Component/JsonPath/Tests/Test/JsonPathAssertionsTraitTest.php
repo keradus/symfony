@@ -19,17 +19,17 @@ class JsonPathAssertionsTraitTest extends TestCase
 {
     use JsonPathAssertionsTrait;
 
-    public function testAssertJsonPathEqualsOk()
+    public function testAssertJsonPathEqualsOk(): void
     {
         self::assertJsonPathEquals([1], '$.a[2]', self::getSimpleCollectionCrawlerData());
     }
 
-    public function testAssertJsonPathEqualsOkWithTypeCoercion()
+    public function testAssertJsonPathEqualsOkWithTypeCoercion(): void
     {
         self::assertJsonPathEquals(['1'], '$.a[2]', self::getSimpleCollectionCrawlerData());
     }
 
-    public function testAssertJsonPathEqualsKo()
+    public function testAssertJsonPathEqualsKo(): void
     {
         $thrown = false;
         try {
@@ -43,12 +43,12 @@ class JsonPathAssertionsTraitTest extends TestCase
         self::assertTrue($thrown);
     }
 
-    public function testAssertJsonPathNotEqualsOk()
+    public function testAssertJsonPathNotEqualsOk(): void
     {
         self::assertJsonPathNotEquals([2], '$.a[2]', self::getSimpleCollectionCrawlerData());
     }
 
-    public function testAssertJsonPathNotEqualsKo()
+    public function testAssertJsonPathNotEqualsKo(): void
     {
         $thrown = false;
         try {
@@ -62,12 +62,12 @@ class JsonPathAssertionsTraitTest extends TestCase
         self::assertTrue($thrown);
     }
 
-    public function testAssertJsonPathCountOk()
+    public function testAssertJsonPathCountOk(): void
     {
         self::assertJsonPathCount(6, '$.a[*]', self::getSimpleCollectionCrawlerData());
     }
 
-    public function testAssertJsonPathCountOkWithFilter()
+    public function testAssertJsonPathCountOkWithFilter(): void
     {
         self::assertJsonPathCount(2, '$.book[?(@.price > 25)]', <<<JSON
             {
@@ -82,7 +82,7 @@ class JsonPathAssertionsTraitTest extends TestCase
         );
     }
 
-    public function testAssertJsonPathCountKo()
+    public function testAssertJsonPathCountKo(): void
     {
         $thrown = false;
         try {
@@ -96,12 +96,12 @@ class JsonPathAssertionsTraitTest extends TestCase
         self::assertTrue($thrown);
     }
 
-    public function testAssertJsonPathSameOk()
+    public function testAssertJsonPathSameOk(): void
     {
         self::assertJsonPathSame([1], '$.a[2]', self::getSimpleCollectionCrawlerData());
     }
 
-    public function testAssertJsonPathSameKo()
+    public function testAssertJsonPathSameKo(): void
     {
         $thrown = false;
         try {
@@ -115,7 +115,7 @@ class JsonPathAssertionsTraitTest extends TestCase
         self::assertTrue($thrown);
     }
 
-    public function testAssertJsonPathHasNoTypeCoercion()
+    public function testAssertJsonPathHasNoTypeCoercion(): void
     {
         $thrown = false;
         try {
@@ -129,12 +129,12 @@ class JsonPathAssertionsTraitTest extends TestCase
         self::assertTrue($thrown);
     }
 
-    public function testAssertJsonPathNotSameOk()
+    public function testAssertJsonPathNotSameOk(): void
     {
         self::assertJsonPathNotSame([2], '$.a[2]', self::getSimpleCollectionCrawlerData());
     }
 
-    public function testAssertJsonPathNotSameKo()
+    public function testAssertJsonPathNotSameKo(): void
     {
         $thrown = false;
         try {
@@ -148,17 +148,17 @@ class JsonPathAssertionsTraitTest extends TestCase
         self::assertTrue($thrown);
     }
 
-    public function testAssertJsonPathNotSameHasNoTypeCoercion()
+    public function testAssertJsonPathNotSameHasNoTypeCoercion(): void
     {
         self::assertJsonPathNotSame(['1'], '$.a[2]', self::getSimpleCollectionCrawlerData());
     }
 
-    public function testAssertJsonPathContainsOk()
+    public function testAssertJsonPathContainsOk(): void
     {
         self::assertJsonPathContains(1, '$.a[*]', self::getSimpleCollectionCrawlerData());
     }
 
-    public function testAssertJsonPathContainsKo()
+    public function testAssertJsonPathContainsKo(): void
     {
         $thrown = false;
         try {
@@ -172,12 +172,12 @@ class JsonPathAssertionsTraitTest extends TestCase
         self::assertTrue($thrown);
     }
 
-    public function testAssertJsonPathNotContainsOk()
+    public function testAssertJsonPathNotContainsOk(): void
     {
         self::assertJsonPathNotContains(0, '$.a[*]', self::getSimpleCollectionCrawlerData());
     }
 
-    public function testAssertJsonPathNotContainsKo()
+    public function testAssertJsonPathNotContainsKo(): void
     {
         $thrown = false;
         try {

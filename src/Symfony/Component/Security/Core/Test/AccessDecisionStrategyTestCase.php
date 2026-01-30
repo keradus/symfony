@@ -28,12 +28,10 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 abstract class AccessDecisionStrategyTestCase extends TestCase
 {
     /**
-     * @dataProvider provideStrategyTests
-     *
      * @param VoterInterface[] $voters
      */
     #[DataProvider('provideStrategyTests')]
-    final public function testDecide(AccessDecisionStrategyInterface $strategy, array $voters, bool $expected)
+    final public function testDecide(AccessDecisionStrategyInterface $strategy, array $voters, bool $expected): void
     {
         $manager = new AccessDecisionManager($voters, $strategy);
 

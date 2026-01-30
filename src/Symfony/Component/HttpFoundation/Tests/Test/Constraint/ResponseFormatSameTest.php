@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
  */
 class ResponseFormatSameTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $request = new Request();
         $request->setFormat('custom', ['application/vnd.myformat']);
@@ -37,7 +37,7 @@ class ResponseFormatSameTest extends TestCase
         $constraint->evaluate(new Response('', 200, ['Content-Type' => 'application/ld+json']));
     }
 
-    public function testNullFormat()
+    public function testNullFormat(): void
     {
         $constraint = new ResponseFormatSame(new Request(), null);
         $this->assertTrue($constraint->evaluate(new Response(), '', true));
@@ -48,7 +48,7 @@ class ResponseFormatSameTest extends TestCase
         $constraint->evaluate(new Response('', 200, ['Content-Type' => 'application/ld+json']));
     }
 
-    public function testOverriddenFormat()
+    public function testOverriddenFormat(): void
     {
         $request = new Request();
         $request->setFormat('jsonapi', ['application/vnd.api+json']);

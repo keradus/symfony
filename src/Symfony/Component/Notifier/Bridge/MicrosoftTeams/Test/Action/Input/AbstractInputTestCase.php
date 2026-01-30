@@ -21,7 +21,7 @@ abstract class AbstractInputTestCase extends TestCase
 {
     abstract public function createInput(): AbstractInput;
 
-    public function testId()
+    public function testId(): void
     {
         $input = $this->createInput();
 
@@ -30,7 +30,7 @@ abstract class AbstractInputTestCase extends TestCase
         $this->assertSame($value, $input->toArray()['id']);
     }
 
-    public function testIsRequiredWithFalse()
+    public function testIsRequiredWithFalse(): void
     {
         $input = $this->createInput();
 
@@ -39,7 +39,7 @@ abstract class AbstractInputTestCase extends TestCase
         $this->assertFalse($input->toArray()['isRequired']);
     }
 
-    public function testIsRequiredWithTrue()
+    public function testIsRequiredWithTrue(): void
     {
         $input = $this->createInput();
 
@@ -48,7 +48,7 @@ abstract class AbstractInputTestCase extends TestCase
         $this->assertTrue($input->toArray()['isRequired']);
     }
 
-    public function testTitle()
+    public function testTitle(): void
     {
         $input = $this->createInput();
 
@@ -57,7 +57,7 @@ abstract class AbstractInputTestCase extends TestCase
         $this->assertSame($value, $input->toArray()['title']);
     }
 
-    public function testValue()
+    public function testValue(): void
     {
         $input = $this->createInput();
 

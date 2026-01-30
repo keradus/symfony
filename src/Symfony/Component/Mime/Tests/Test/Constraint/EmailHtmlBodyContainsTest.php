@@ -18,14 +18,14 @@ use Symfony\Component\Mime\Test\Constraint\EmailHtmlBodyContains;
 
 class EmailHtmlBodyContainsTest extends TestCase
 {
-    public function testToString()
+    public function testToString(): void
     {
         $constraint = new EmailHtmlBodyContains('expectedValue');
 
         $this->assertSame('contains "expectedValue"', $constraint->toString());
     }
 
-    public function testFailureDescription()
+    public function testFailureDescription(): void
     {
         $expectedValue = 'expectedValue';
         $email = new Email();

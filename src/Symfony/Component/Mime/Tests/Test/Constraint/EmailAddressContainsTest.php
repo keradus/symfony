@@ -19,14 +19,14 @@ use Symfony\Component\Mime\Test\Constraint\EmailAddressContains;
 
 class EmailAddressContainsTest extends TestCase
 {
-    public function testToString()
+    public function testToString(): void
     {
         $constraint = new EmailAddressContains('headerName', 'expectedValue');
 
         $this->assertSame('contains address "headerName" with value "expectedValue"', $constraint->toString());
     }
 
-    public function testFailureDescription()
+    public function testFailureDescription(): void
     {
         $mailboxHeader = 'text@example.com';
         $headers = new Headers();

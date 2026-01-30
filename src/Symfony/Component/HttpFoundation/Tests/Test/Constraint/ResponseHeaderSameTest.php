@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Test\Constraint\ResponseHeaderSame;
 
 class ResponseHeaderSameTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new ResponseHeaderSame('Cache-Control', 'no-cache, private');
         $this->assertTrue($constraint->evaluate(new Response(), '', true));

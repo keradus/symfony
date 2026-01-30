@@ -18,7 +18,7 @@ use Symfony\Component\DomCrawler\Test\Constraint\CrawlerSelectorTextSame;
 
 class CrawlerSelectorTextSameTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new CrawlerSelectorTextSame('title', 'Foo');
         $this->assertTrue($constraint->evaluate(new Crawler('<html><head><title>Foo'), '', true));

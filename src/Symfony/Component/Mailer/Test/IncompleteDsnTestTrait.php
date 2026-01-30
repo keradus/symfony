@@ -26,7 +26,7 @@ trait IncompleteDsnTestTrait
      * @dataProvider incompleteDsnProvider
      */
     #[DataProvider('incompleteDsnProvider')]
-    public function testIncompleteDsnException(Dsn $dsn)
+    public function testIncompleteDsnException(Dsn $dsn): void
     {
         $factory = $this->getFactory();
 

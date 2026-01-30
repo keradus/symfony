@@ -19,14 +19,14 @@ use Symfony\Component\Mime\Test\Constraint\EmailHasHeader;
 
 class EmailHasHeaderTest extends TestCase
 {
-    public function testToString()
+    public function testToString(): void
     {
         $constraint = new EmailHasHeader('headerName');
 
         $this->assertSame('has header "headerName"', $constraint->toString());
     }
 
-    public function testFailureDescription()
+    public function testFailureDescription(): void
     {
         $headers = new Headers();
         $headers->addMailboxHeader('headerName', 'test@example.com');

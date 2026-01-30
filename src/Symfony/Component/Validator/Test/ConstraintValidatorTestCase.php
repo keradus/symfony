@@ -102,7 +102,7 @@ abstract class ConstraintValidatorTestCase extends TestCase
         }
     }
 
-    protected function setDefaultTimezone(?string $defaultTimezone)
+    protected function setDefaultTimezone(?string $defaultTimezone): void
     {
         // Make sure this method cannot be called twice before calling
         // also restoreDefaultTimezone()
@@ -112,7 +112,7 @@ abstract class ConstraintValidatorTestCase extends TestCase
         }
     }
 
-    protected function restoreDefaultTimezone()
+    protected function restoreDefaultTimezone(): void
     {
         if (null !== $this->defaultTimezone) {
             date_default_timezone_set($this->defaultTimezone);
@@ -180,13 +180,13 @@ abstract class ConstraintValidatorTestCase extends TestCase
         return $context;
     }
 
-    protected function setGroup(?string $group)
+    protected function setGroup(?string $group): void
     {
         $this->group = $group;
         $this->context->setGroup($group);
     }
 
-    protected function setObject(mixed $object)
+    protected function setObject(mixed $object): void
     {
         $this->object = $object;
         $this->metadata = \is_object($object)
@@ -196,7 +196,7 @@ abstract class ConstraintValidatorTestCase extends TestCase
         $this->context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
     }
 
-    protected function setProperty(mixed $object, string $property)
+    protected function setProperty(mixed $object, string $property): void
     {
         $this->object = $object;
         $this->metadata = \is_object($object)
@@ -206,45 +206,45 @@ abstract class ConstraintValidatorTestCase extends TestCase
         $this->context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
     }
 
-    protected function setValue(mixed $value)
+    protected function setValue(mixed $value): void
     {
         $this->value = $value;
         $this->context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
     }
 
-    protected function setRoot(mixed $root)
+    protected function setRoot(mixed $root): void
     {
         $this->root = $root;
         $this->context = $this->createContext();
         $this->validator->initialize($this->context);
     }
 
-    protected function setPropertyPath(string $propertyPath)
+    protected function setPropertyPath(string $propertyPath): void
     {
         $this->propertyPath = $propertyPath;
         $this->context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
     }
 
-    protected function expectNoValidate()
+    protected function expectNoValidate(): void
     {
         $validator = $this->context->getValidator()->inContext($this->context);
         $validator->expectNoValidate();
     }
 
-    protected function expectValidateAt(int $i, string $propertyPath, mixed $value, string|GroupSequence|array|null $group)
+    protected function expectValidateAt(int $i, string $propertyPath, mixed $value, string|GroupSequence|array|null $group): void
     {
         $validator = $this->context->getValidator()->inContext($this->context);
-        $validator->expectValidation($i, $propertyPath, $value, $group, static function ($passedConstraints) {
+        $validator->expectValidation($i, $propertyPath, $value, $group, static function ($passedConstraints): void {
             $expectedConstraints = LogicalOr::fromConstraints(new IsNull(), new IsIdentical([]), new IsInstanceOf(Valid::class));
 
             Assert::assertThat($passedConstraints, $expectedConstraints);
         });
     }
 
-    protected function expectValidateValue(int $i, mixed $value, array $constraints = [], string|GroupSequence|array|null $group = null)
+    protected function expectValidateValue(int $i, mixed $value, array $constraints = [], string|GroupSequence|array|null $group = null): void
     {
         $contextualValidator = $this->context->getValidator()->inContext($this->context);
-        $contextualValidator->expectValidation($i, null, $value, $group, static function ($passedConstraints) use ($constraints) {
+        $contextualValidator->expectValidation($i, null, $value, $group, static function ($passedConstraints) use ($constraints): void {
             if (!\is_array($passedConstraints)) {
                 $passedConstraints = [$passedConstraints];
             }
@@ -253,10 +253,10 @@ abstract class ConstraintValidatorTestCase extends TestCase
         });
     }
 
-    protected function expectFailingValueValidation(int $i, mixed $value, array $constraints, string|GroupSequence|array|null $group, ConstraintViolationInterface $violation)
+    protected function expectFailingValueValidation(int $i, mixed $value, array $constraints, string|GroupSequence|array|null $group, ConstraintViolationInterface $violation): void
     {
         $contextualValidator = $this->context->getValidator()->inContext($this->context);
-        $contextualValidator->expectValidation($i, null, $value, $group, static function ($passedConstraints) use ($constraints) {
+        $contextualValidator->expectValidation($i, null, $value, $group, static function ($passedConstraints) use ($constraints): void {
             if (!\is_array($passedConstraints)) {
                 $passedConstraints = [$passedConstraints];
             }
@@ -265,10 +265,10 @@ abstract class ConstraintValidatorTestCase extends TestCase
         }, $violation);
     }
 
-    protected function expectValidateValueAt(int $i, string $propertyPath, mixed $value, Constraint|array $constraints, string|GroupSequence|array|null $group = null)
+    protected function expectValidateValueAt(int $i, string $propertyPath, mixed $value, Constraint|array $constraints, string|GroupSequence|array|null $group = null): void
     {
         $contextualValidator = $this->context->getValidator()->inContext($this->context);
-        $contextualValidator->expectValidation($i, $propertyPath, $value, $group, static function ($passedConstraints) use ($constraints) {
+        $contextualValidator->expectValidation($i, $propertyPath, $value, $group, static function ($passedConstraints) use ($constraints): void {
             Assert::assertEquals($constraints, $passedConstraints);
         });
     }
@@ -288,7 +288,7 @@ abstract class ConstraintValidatorTestCase extends TestCase
         return $context->getViolations();
     }
 
-    protected function assertNoViolation()
+    protected function assertNoViolation(): void
     {
         $this->assertSame(0, $violationsCount = \count($this->context->getViolations()), \sprintf('0 violation expected. Got %u.', $violationsCount));
     }

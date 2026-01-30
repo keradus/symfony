@@ -20,7 +20,7 @@ use Symfony\Component\BrowserKit\Test\Constraint\BrowserHasCookie;
 
 class BrowserHasCookieTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $browser = $this->getBrowser();
         $constraint = new BrowserHasCookie('foo', '/path');
@@ -36,7 +36,7 @@ class BrowserHasCookieTest extends TestCase
         $constraint->evaluate($browser);
     }
 
-    public function testConstraintWithWrongPath()
+    public function testConstraintWithWrongPath(): void
     {
         $browser = $this->getBrowser();
         $constraint = new BrowserHasCookie('foo', '/other');
@@ -47,7 +47,7 @@ class BrowserHasCookieTest extends TestCase
         $constraint->evaluate($browser);
     }
 
-    public function testConstraintWithWrongDomain()
+    public function testConstraintWithWrongDomain(): void
     {
         $browser = $this->getBrowser();
         $constraint = new BrowserHasCookie('foo', '/path', 'example.org');

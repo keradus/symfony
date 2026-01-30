@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsRedirected;
 
 class ResponseIsRedirectedTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new ResponseIsRedirected();
 
@@ -31,7 +31,7 @@ class ResponseIsRedirectedTest extends TestCase
         $constraint->evaluate(new Response('Body content'));
     }
 
-    public function testReducedVerbosity()
+    public function testReducedVerbosity(): void
     {
         $constraint = new ResponseIsRedirected(verbose: false);
         try {

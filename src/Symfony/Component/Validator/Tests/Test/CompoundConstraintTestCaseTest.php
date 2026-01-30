@@ -29,7 +29,7 @@ class CompoundConstraintTestCaseTest extends CompoundConstraintTestCase
         return new DummyCompoundConstraint();
     }
 
-    public function testAssertNoViolation()
+    public function testAssertNoViolation(): void
     {
         $this->validateValue('ab1');
 
@@ -37,7 +37,7 @@ class CompoundConstraintTestCaseTest extends CompoundConstraintTestCase
         $this->assertViolationsCount(0);
     }
 
-    public function testAssertIsRaisedByCompound()
+    public function testAssertIsRaisedByCompound(): void
     {
         $this->validateValue('');
 
@@ -45,7 +45,7 @@ class CompoundConstraintTestCaseTest extends CompoundConstraintTestCase
         $this->assertViolationsCount(1);
     }
 
-    public function testMultipleAssertAreRaisedByCompound()
+    public function testMultipleAssertAreRaisedByCompound(): void
     {
         $this->validateValue('1245');
 
@@ -56,7 +56,7 @@ class CompoundConstraintTestCaseTest extends CompoundConstraintTestCase
         $this->assertViolationsCount(2);
     }
 
-    public function testNoAssertRaisedButExpected()
+    public function testNoAssertRaisedButExpected(): void
     {
         $this->validateValue('azert');
 
@@ -68,7 +68,7 @@ class CompoundConstraintTestCaseTest extends CompoundConstraintTestCase
         ]);
     }
 
-    public function testAssertRaisedByCompoundIsNotExactlyTheSame()
+    public function testAssertRaisedByCompoundIsNotExactlyTheSame(): void
     {
         $this->validateValue('123');
 
@@ -77,7 +77,7 @@ class CompoundConstraintTestCaseTest extends CompoundConstraintTestCase
         $this->assertViolationsRaisedByCompound(new Regex('/^[a-z]+$/'));
     }
 
-    public function testAssertRaisedByCompoundButGotNone()
+    public function testAssertRaisedByCompoundButGotNone(): void
     {
         $this->validateValue('123');
 
