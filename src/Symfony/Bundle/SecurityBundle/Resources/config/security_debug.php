@@ -15,7 +15,7 @@ use Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener;
 use Symfony\Bundle\SecurityBundle\EventListener\VoteListener;
 use Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('debug.security.access.decision_manager', TraceableAccessDecisionManager::class)
             ->decorate('security.access.decision_manager')

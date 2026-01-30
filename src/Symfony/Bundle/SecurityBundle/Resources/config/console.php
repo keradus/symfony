@@ -13,7 +13,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Component\PasswordHasher\Command\UserPasswordHashCommand;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('security.command.user_password_hash', UserPasswordHashCommand::class)
             ->args([

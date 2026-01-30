@@ -29,7 +29,7 @@ use Symfony\Component\Security\Http\EventListener\UserCheckerListener;
 use Symfony\Component\Security\Http\EventListener\UserProviderListener;
 use Symfony\Component\Security\Http\Firewall\AuthenticatorManagerListener;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
 
         // Manager

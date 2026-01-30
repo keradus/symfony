@@ -22,7 +22,7 @@ use Symfony\Component\Security\Http\RememberMe\RememberMeHandlerInterface;
 use Symfony\Component\Security\Http\RememberMe\ResponseListener;
 use Symfony\Component\Security\Http\RememberMe\SignatureRememberMeHandler;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('security.rememberme.response_listener', ResponseListener::class)
             ->tag('kernel.event_subscriber')

@@ -19,7 +19,7 @@ use Symfony\Component\Security\Http\Authenticator\LoginLinkAuthenticator;
 use Symfony\Component\Security\Http\LoginLink\LoginLinkHandler;
 use Symfony\Component\Security\Http\LoginLink\LoginLinkHandlerInterface;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $container->services()
         ->set('security.authenticator.login_link', LoginLinkAuthenticator::class)
             ->abstract()
