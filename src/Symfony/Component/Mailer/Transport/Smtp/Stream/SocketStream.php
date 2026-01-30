@@ -150,7 +150,7 @@ final class SocketStream extends AbstractStream
         $streamContext = stream_context_create($options);
 
         $timeout = $this->getTimeout();
-        set_error_handler(function ($type, $msg) {
+        set_error_handler(function ($type, $msg): void {
             throw new TransportException(\sprintf('Connection could not be established with host "%s": ', $this->url).$msg);
         });
         try {
@@ -167,7 +167,7 @@ final class SocketStream extends AbstractStream
 
     public function startTLS(): bool
     {
-        set_error_handler(static function ($type, $msg) {
+        set_error_handler(static function ($type, $msg): void {
             throw new TransportException('Unable to connect with STARTTLS: '.$msg);
         });
         try {

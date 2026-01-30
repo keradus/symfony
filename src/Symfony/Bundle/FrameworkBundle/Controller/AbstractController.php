@@ -303,7 +303,7 @@ abstract class AbstractController implements ServiceSubscriberInterface
 
         $twig = $this->container->get('twig');
 
-        $callback = static function () use ($twig, $view, $parameters) {
+        $callback = static function () use ($twig, $view, $parameters): void {
             $twig->display($view, $parameters);
         };
 

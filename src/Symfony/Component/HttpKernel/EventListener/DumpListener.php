@@ -46,7 +46,7 @@ class DumpListener implements EventSubscriberInterface
         $dumper = !$this->profilerDumper || !$input?->hasOption('profile') || !$input?->getOption('profile') ? $this->dumper : $this->profilerDumper;
         $connection = $this->connection;
 
-        VarDumper::setHandler(static function ($var, ?string $label = null) use ($cloner, $dumper, $connection) {
+        VarDumper::setHandler(static function ($var, ?string $label = null) use ($cloner, $dumper, $connection): void {
             $data = $cloner->cloneVar($var);
             if (null !== $label) {
                 $data = $data->withContext(['label' => $label]);

@@ -96,13 +96,13 @@ class TextDescriptor extends Descriptor
         if ($shouldShowScheme) {
             $tableHeaders[] = 'Scheme';
         } else {
-            array_walk($tableRows, static function (&$row) { unset($row['Scheme']); });
+            array_walk($tableRows, static function (&$row): void { unset($row['Scheme']); });
         }
 
         if ($shouldShowHost) {
             $tableHeaders[] = 'Host';
         } else {
-            array_walk($tableRows, static function (&$row) { unset($row['Host']); });
+            array_walk($tableRows, static function (&$row): void { unset($row['Host']); });
         }
 
         $tableHeaders[] = 'Path';

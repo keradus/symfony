@@ -285,7 +285,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
 
         if ('sqlsrv' === $platformName || 'oci' === $platformName) {
-            $bind = static function ($id, $data) use ($stmt) {
+            $bind = static function ($id, $data) use ($stmt): void {
                 $stmt->bindValue(1, $id);
                 $stmt->bindValue(2, $id);
                 $stmt->bindValue(3, $data, ParameterType::LARGE_OBJECT);
@@ -296,7 +296,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
             $stmt->bindValue(7, $lifetime, ParameterType::INTEGER);
             $stmt->bindValue(8, $now, ParameterType::INTEGER);
         } elseif (null !== $platformName) {
-            $bind = static function ($id, $data) use ($stmt) {
+            $bind = static function ($id, $data) use ($stmt): void {
                 $stmt->bindValue(1, $id);
                 $stmt->bindValue(2, $data, ParameterType::LARGE_OBJECT);
             };
@@ -310,7 +310,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
             $insertStmt->bindValue(3, $lifetime, ParameterType::INTEGER);
             $insertStmt->bindValue(4, $now, ParameterType::INTEGER);
 
-            $bind = static function ($id, $data) use ($stmt, $insertStmt) {
+            $bind = static function ($id, $data) use ($stmt, $insertStmt): void {
                 $stmt->bindValue(1, $data, ParameterType::LARGE_OBJECT);
                 $stmt->bindValue(4, $id);
                 $insertStmt->bindValue(1, $id);

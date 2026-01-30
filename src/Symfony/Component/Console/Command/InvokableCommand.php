@@ -118,7 +118,7 @@ class InvokableCommand implements SignalableCommandInterface
             return $code;
         }
 
-        set_error_handler(static function () {});
+        set_error_handler(static function (): void {});
         try {
             if ($c = \Closure::bind($code, $this->command)) {
                 $code = $c;

@@ -196,7 +196,7 @@ class JsonDescriptor extends Descriptor
 
         // Recursively search for enum values, so we can replace it
         // before json_encode (which will not display anything for \UnitEnum otherwise)
-        array_walk_recursive($data, static function (&$value) {
+        array_walk_recursive($data, static function (&$value): void {
             if ($value instanceof \UnitEnum) {
                 $value = ltrim(var_export($value, true), '\\');
             }

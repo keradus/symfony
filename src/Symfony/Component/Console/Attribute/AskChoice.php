@@ -71,7 +71,7 @@ class AskChoice implements InteractiveAttributeInterface
             throw new LogicException(\sprintf('The #[AskChoice] attribute for the %s "$%s" of "%s" requires either explicit choices or a BackedEnum type.', $reflection->getMemberName(), $name, $reflection->getSourceName()));
         }
 
-        $self->closure = function (SymfonyStyle $io, InputInterface $input) use ($self, $reflection, $name, $type, $isBackedEnum) {
+        $self->closure = function (SymfonyStyle $io, InputInterface $input) use ($self, $reflection, $name, $type, $isBackedEnum): void {
             if ($reflection->isProperty() && isset($this->{$reflection->getName()})) {
                 return;
             }

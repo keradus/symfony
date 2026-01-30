@@ -238,7 +238,7 @@ class EventDispatcher implements EventDispatcherInterface
             foreach ($listeners as &$listener) {
                 $closure = &$this->optimized[$eventName][];
                 if (\is_array($listener) && isset($listener[0]) && $listener[0] instanceof \Closure && 2 >= \count($listener)) {
-                    $closure = static function (...$args) use (&$listener, &$closure) {
+                    $closure = static function (...$args) use (&$listener, &$closure): void {
                         if ($listener[0] instanceof \Closure) {
                             $listener[0] = $listener[0]();
                             $listener[1] ??= '__invoke';

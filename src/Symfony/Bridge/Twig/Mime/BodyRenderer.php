@@ -48,7 +48,7 @@ final class BodyRenderer implements BodyRendererInterface
             return;
         }
 
-        $callback = function () use ($message) {
+        $callback = function () use ($message): void {
             $messageContext = $message->getContext();
 
             if (isset($messageContext['email'])) {

@@ -212,7 +212,7 @@ class FailedMessagesRetryCommand extends AbstractFailedMessagesCommand implement
     private function runWorker(string $failureTransportName, ReceiverInterface $receiver, SymfonyStyle $io, SymfonyStyle $errorIo, bool $shouldForce): int
     {
         $count = 0;
-        $listener = function (WorkerMessageReceivedEvent $messageReceivedEvent) use ($io, $errorIo, $receiver, $shouldForce, &$count) {
+        $listener = function (WorkerMessageReceivedEvent $messageReceivedEvent) use ($io, $errorIo, $receiver, $shouldForce, &$count): void {
             ++$count;
             $envelope = $messageReceivedEvent->getEnvelope();
 

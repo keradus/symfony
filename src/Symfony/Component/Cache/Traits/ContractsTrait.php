@@ -68,7 +68,7 @@ trait ContractsTrait
         static $setMetadata;
 
         $setMetadata ??= \Closure::bind(
-            static function (CacheItem $item, float $startTime, ?array &$metadata) {
+            static function (CacheItem $item, float $startTime, ?array &$metadata): void {
                 if ($item->expiry > $endTime = microtime(true)) {
                     $item->newMetadata[CacheItem::METADATA_EXPIRY] = $metadata[CacheItem::METADATA_EXPIRY] = $item->expiry;
                     $item->newMetadata[CacheItem::METADATA_CTIME] = $metadata[CacheItem::METADATA_CTIME] = (int) ceil(1000 * ($endTime - $startTime));
@@ -99,7 +99,7 @@ trait ContractsTrait
             }
 
             try {
-                $value = ($this->callbackWrapper)($callback, $item, $save, $pool, static function (CacheItem $item) use ($setMetadata, $startTime, &$metadata) {
+                $value = ($this->callbackWrapper)($callback, $item, $save, $pool, static function (CacheItem $item) use ($setMetadata, $startTime, &$metadata): void {
                     $setMetadata($item, $startTime, $metadata);
                 }, $this->logger ?? null, $beta);
                 $setMetadata($item, $startTime, $metadata);

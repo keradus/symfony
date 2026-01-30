@@ -153,7 +153,7 @@ abstract class Descriptor implements DescriptorInterface
         // Recursively search for enum values, so we can replace it
         // before json_encode (which will not display anything for \UnitEnum otherwise)
         if (\is_array($value)) {
-            array_walk_recursive($value, static function (&$value) {
+            array_walk_recursive($value, static function (&$value): void {
                 if ($value instanceof \UnitEnum) {
                     $value = ltrim(var_export($value, true), '\\');
                 }

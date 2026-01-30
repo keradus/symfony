@@ -119,7 +119,7 @@ class WebDebugToolbarListener implements EventSubscriberInterface
 
         if ($response->headers->has('X-Debug-Token') && $response instanceof EventStreamResponse) {
             $callback = $response->getCallback();
-            $response->setCallback(static function () use ($callback, $response) {
+            $response->setCallback(static function () use ($callback, $response): void {
                 $response->sendEvent(new ServerEvent(
                     [
                         $response->headers->get('X-Debug-Token') ?? '',

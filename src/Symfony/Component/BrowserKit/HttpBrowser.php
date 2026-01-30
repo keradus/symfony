@@ -94,7 +94,7 @@ class HttpBrowser extends AbstractBrowser
             return ['', []];
         }
 
-        array_walk_recursive($fields, $caster = static function (&$v) use (&$caster) {
+        array_walk_recursive($fields, $caster = static function (&$v) use (&$caster): void {
             if (\is_object($v)) {
                 if ($vars = get_object_vars($v)) {
                     array_walk_recursive($vars, $caster);

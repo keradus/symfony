@@ -112,7 +112,7 @@ class MockResponse implements ResponseInterface, StreamableInterface
             // ignore errors when canceling
         }
 
-        $onProgress = $this->requestOptions['on_progress'] ?? static function () {};
+        $onProgress = $this->requestOptions['on_progress'] ?? static function (): void {};
         $dlSize = isset($this->headers['content-encoding']) || 'HEAD' === ($this->info['http_method'] ?? null) || \in_array($this->info['http_code'], [204, 304], true) ? 0 : (int) ($this->headers['content-length'][0] ?? 0);
         $onProgress($this->offset, $dlSize, $this->info);
     }
@@ -225,7 +225,7 @@ class MockResponse implements ResponseInterface, StreamableInterface
      */
     private static function writeRequest(self $response, array $options, ResponseInterface $mock): void
     {
-        $onProgress = $options['on_progress'] ?? static function () {};
+        $onProgress = $options['on_progress'] ?? static function (): void {};
         $response->info += $mock->getInfo() ?: [];
         if (null !== $mock->getInfo('start_time')) {
             $response->info['start_time'] = $mock->getInfo('start_time');
@@ -271,7 +271,7 @@ class MockResponse implements ResponseInterface, StreamableInterface
      */
     private static function readResponse(self $response, array $options, ResponseInterface $mock, int &$offset): void
     {
-        $onProgress = $options['on_progress'] ?? static function () {};
+        $onProgress = $options['on_progress'] ?? static function (): void {};
 
         // populate info related to headers
         $info = $mock->getInfo() ?: [];

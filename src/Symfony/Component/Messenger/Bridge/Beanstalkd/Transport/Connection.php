@@ -182,7 +182,7 @@ class Connection
 
     public function ack(string $id): void
     {
-        $this->withReconnect(function () use ($id) {
+        $this->withReconnect(function () use ($id): void {
             $this->useTube();
             $this->client->delete(new JobId($id));
         });
@@ -190,7 +190,7 @@ class Connection
 
     public function reject(string $id, ?int $priority = null, bool $forceDelete = false): void
     {
-        $this->withReconnect(function () use ($id, $priority, $forceDelete) {
+        $this->withReconnect(function () use ($id, $priority, $forceDelete): void {
             $this->useTube();
 
             if (!$forceDelete && $this->buryOnReject) {
@@ -203,7 +203,7 @@ class Connection
 
     public function keepalive(string $id): void
     {
-        $this->withReconnect(function () use ($id) {
+        $this->withReconnect(function () use ($id): void {
             $this->useTube();
             $this->client->touch(new JobId($id));
         });

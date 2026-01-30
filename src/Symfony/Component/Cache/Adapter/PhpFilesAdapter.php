@@ -52,7 +52,7 @@ class PhpFilesAdapter extends AbstractAdapter implements PruneableInterface
         self::$startTime ??= $_SERVER['REQUEST_TIME'] ?? time();
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
-        $this->includeHandler = static function ($type, $msg, $file, $line) {
+        $this->includeHandler = static function ($type, $msg, $file, $line): void {
             throw new \ErrorException($msg, 0, $type, $file, $line);
         };
     }

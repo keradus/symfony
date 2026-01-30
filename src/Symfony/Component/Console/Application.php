@@ -185,7 +185,7 @@ class Application implements ResetInterface
         $input ??= new ArgvInput();
         $output ??= new ConsoleOutput();
 
-        $renderException = function (\Throwable $e) use ($output) {
+        $renderException = function (\Throwable $e) use ($output): void {
             if ($output instanceof ConsoleOutputInterface) {
                 $this->renderThrowable($e, $output->getErrorOutput());
             } else {
@@ -1030,7 +1030,7 @@ class Application implements ResetInterface
                     $signalEvent = new ConsoleSignalEvent($command, $input, $output, $signal);
                     $alarmEvent = \SIGALRM === $signal ? new ConsoleAlarmEvent($command, $input, $output) : null;
 
-                    $signalRegistry->register($signal, function ($signal) use ($signalEvent, $alarmEvent, $command, $commandSignals, $input, $output) {
+                    $signalRegistry->register($signal, function ($signal) use ($signalEvent, $alarmEvent, $command, $commandSignals, $input, $output): void {
                         $this->dispatcher->dispatch($signalEvent, ConsoleEvents::SIGNAL);
                         $exitCode = $signalEvent->getExitCode();
 

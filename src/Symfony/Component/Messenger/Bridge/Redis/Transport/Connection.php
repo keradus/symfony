@@ -179,7 +179,7 @@ class Connection
         @$redis->{$connect}($host, $port, $params['timeout'], $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...(\defined('Redis::SCAN_PREFIX') || \extension_loaded('relay')) ? [['stream' => $params['ssl'] ?? null]] : []);
 
         $error = null;
-        set_error_handler(static function ($type, $msg) use (&$error) { $error = $msg; });
+        set_error_handler(static function ($type, $msg) use (&$error): void { $error = $msg; });
 
         try {
             $isConnected = $redis->isConnected();

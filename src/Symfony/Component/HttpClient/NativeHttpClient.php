@@ -137,7 +137,7 @@ final class NativeHttpClient implements HttpClientInterface, LoggerAwareInterfac
 
         if ($onProgress = $options['on_progress']) {
             $maxDuration = 0 < $options['max_duration'] ? $options['max_duration'] : \INF;
-            $onProgress = static function (...$progress) use ($onProgress, &$info, $maxDuration) {
+            $onProgress = static function (...$progress) use ($onProgress, &$info, $maxDuration): void {
                 if ($info['total_time'] >= $maxDuration) {
                     throw new TransportException(\sprintf('Max duration was reached for "%s".', implode('', $info['url'])));
                 }
@@ -168,7 +168,7 @@ final class NativeHttpClient implements HttpClientInterface, LoggerAwareInterfac
         }
 
         // Always register a notification callback to compute live stats about the response
-        $notification = static function (int $code, int $severity, ?string $msg, int $msgCode, int $dlNow, int $dlSize) use ($onProgress, &$info) {
+        $notification = static function (int $code, int $severity, ?string $msg, int $msgCode, int $dlNow, int $dlSize) use ($onProgress, &$info): void {
             $info['total_time'] = microtime(true) - $info['start_time'];
 
             if (\STREAM_NOTIFY_PROGRESS === $code) {

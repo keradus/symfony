@@ -121,7 +121,7 @@ abstract class AbstractRecursivePass implements CompilerPassInterface
 
         if (\is_string($factory = $definition->getFactory())) {
             if (str_starts_with($factory, '@=')) {
-                return new \ReflectionFunction(static function (...$args) {});
+                return new \ReflectionFunction(static function (...$args): void {});
             }
 
             if (!\function_exists($factory)) {
@@ -205,11 +205,11 @@ abstract class AbstractRecursivePass implements CompilerPassInterface
 
         if (!$r->hasMethod($method)) {
             if ($r->hasMethod('__call') && ($r = $r->getMethod('__call')) && $r->isPublic()) {
-                return new \ReflectionMethod(static function (...$arguments) {}, '__invoke');
+                return new \ReflectionMethod(static function (...$arguments): void {}, '__invoke');
             }
 
             if ($r->hasMethod('__callStatic') && ($r = $r->getMethod('__callStatic')) && $r->isPublic()) {
-                return new \ReflectionMethod(static function (...$arguments) {}, '__invoke');
+                return new \ReflectionMethod(static function (...$arguments): void {}, '__invoke');
             }
 
             throw new RuntimeException(\sprintf('Invalid service "%s": method "%s()" does not exist.', $this->currentId, $class !== $this->currentId ? $class.'::'.$method : $method));

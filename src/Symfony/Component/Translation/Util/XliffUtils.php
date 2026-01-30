@@ -90,7 +90,7 @@ class XliffUtils
             $dom->loadXML('<?xml version="1.0"?><test/>');
 
             $tmpfile = tempnam(sys_get_temp_dir(), 'symfony');
-            register_shutdown_function(static function () use ($tmpfile) {
+            register_shutdown_function(static function () use ($tmpfile): void {
                 @unlink($tmpfile);
             });
             $schema = '<?xml version="1.0" encoding="utf-8"?>

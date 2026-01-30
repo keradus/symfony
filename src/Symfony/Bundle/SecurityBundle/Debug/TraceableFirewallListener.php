@@ -55,7 +55,7 @@ final class TraceableFirewallListener extends FirewallListener implements ResetI
                 $contextWrappedListeners = [];
                 $contextAuthenticatorManagerListener = null;
 
-                \Closure::bind(function () use (&$contextWrappedListeners, &$contextAuthenticatorManagerListener) {
+                \Closure::bind(function () use (&$contextWrappedListeners, &$contextAuthenticatorManagerListener): void {
                     foreach ($this->listeners as $listener) {
                         if ($listener instanceof TraceableAuthenticatorManagerListener) {
                             $contextAuthenticatorManagerListener ??= $listener;

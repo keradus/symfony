@@ -341,7 +341,7 @@ trait HttpClientTrait
             static $cookie;
 
             $streams = [];
-            array_walk_recursive($body, $caster = static function (&$v) use (&$caster, &$streams, &$cookie) {
+            array_walk_recursive($body, $caster = static function (&$v) use (&$caster, &$streams, &$cookie): void {
                 if (\is_resource($v) || $v instanceof StreamableInterface) {
                     $cookie = hash('xxh128', $cookie ??= random_bytes(8), true);
                     $k = substr(strtr(base64_encode($cookie), '+/', '-_'), 0, -2);

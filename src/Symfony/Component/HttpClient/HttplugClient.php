@@ -129,9 +129,9 @@ final class HttplugClient implements ClientInterface, HttpAsyncClient, RequestFa
 
         $waitLoop = $this->waitLoop;
 
-        $promise = new GuzzlePromise(static function () use ($response, $waitLoop) {
+        $promise = new GuzzlePromise(static function () use ($response, $waitLoop): void {
             $waitLoop->wait($response);
-        }, static function () use ($response, $promisePool) {
+        }, static function () use ($response, $promisePool): void {
             $response->cancel();
             unset($promisePool[$response]);
         });

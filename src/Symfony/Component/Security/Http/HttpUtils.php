@@ -87,7 +87,7 @@ class HttpUtils
 
         static $setSession;
 
-        $setSession ??= \Closure::bind(static function ($newRequest, $request) { $newRequest->session = $request->session; }, null, Request::class);
+        $setSession ??= \Closure::bind(static function ($newRequest, $request): void { $newRequest->session = $request->session; }, null, Request::class);
         $setSession($newRequest, $request);
 
         if ($request->attributes->has(SecurityRequestAttributes::AUTHENTICATION_ERROR)) {

@@ -29,12 +29,9 @@ class Acknowledger
         private string $handlerClass,
         ?\Closure $ack = null,
     ) {
-        $this->ack = $ack ?? static function () {};
+        $this->ack = $ack ?? static function (): void {};
     }
 
-    /**
-     * @param mixed $result
-     */
     public function ack($result = null): void
     {
         $this->doAck(null, $result);

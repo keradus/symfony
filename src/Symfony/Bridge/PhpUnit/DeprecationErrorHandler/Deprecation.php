@@ -113,7 +113,7 @@ class Deprecation
             return;
         }
 
-        set_error_handler(static function () {});
+        set_error_handler(static function (): void {});
         try {
             $parsedMsg = unserialize($this->message);
         } finally {

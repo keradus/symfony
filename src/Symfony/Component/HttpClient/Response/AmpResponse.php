@@ -90,8 +90,8 @@ final class AmpResponse implements ResponseInterface, StreamableInterface
         $info['max_connect_duration'] = $options['max_connect_duration'];
         $info['debug'] = '';
 
-        $onProgress = $options['on_progress'] ?? static function () {};
-        $onProgress = $this->onProgress = static function () use (&$info, $onProgress) {
+        $onProgress = $options['on_progress'] ?? static function (): void {};
+        $onProgress = $this->onProgress = static function () use (&$info, $onProgress): void {
             $info['total_time'] = microtime(true) - $info['start_time'];
             $onProgress((int) $info['size_download'], ((int) (1 + $info['download_content_length']) ?: 1) - 1, (array) $info);
         };
@@ -100,7 +100,7 @@ final class AmpResponse implements ResponseInterface, StreamableInterface
         $this->id = $id = self::$nextId;
         self::$nextId = str_increment(self::$nextId);
 
-        $info['pause_handler'] = static function (float $duration) use (&$pause) {
+        $info['pause_handler'] = static function (float $duration) use (&$pause): void {
             $pause = $duration;
         };
 
@@ -108,13 +108,13 @@ final class AmpResponse implements ResponseInterface, StreamableInterface
         $multi->openHandles[$id] = new DeferredFuture();
         ++$multi->responseCount;
 
-        $this->canary = new Canary(static function () use ($canceller, $multi, $id) {
+        $this->canary = new Canary(static function () use ($canceller, $multi, $id): void {
             $canceller->cancel();
             $multi->openHandles[$id]?->isComplete() || $multi->openHandles[$id]?->complete();
             unset($multi->openHandles[$id], $multi->handlesActivity[$id]);
         });
 
-        EventLoop::queue(static function () use ($request, $multi, $id, &$info, &$headers, $canceller, &$options, $onProgress, &$handle, $logger, &$pause) {
+        EventLoop::queue(static function () use ($request, $multi, $id, &$info, &$headers, $canceller, &$options, $onProgress, &$handle, $logger, &$pause): void {
             self::generateResponse($request, $multi, $id, $info, $headers, $canceller, $options, $onProgress, $handle, $logger, $pause);
         });
     }
@@ -209,7 +209,7 @@ final class AmpResponse implements ResponseInterface, StreamableInterface
 
     private static function generateResponse(Request $request, AmpClientState $multi, string $id, array &$info, array &$headers, DeferredCancellation $canceller, array &$options, \Closure $onProgress, &$handle, ?LoggerInterface $logger, float &$pause): void
     {
-        $request->setInformationalResponseHandler(static function (Response $response) use ($multi, $id, &$info, &$headers) {
+        $request->setInformationalResponseHandler(static function (Response $response) use ($multi, $id, &$info, &$headers): void {
             self::addResponseHeaders($response, $info, $headers);
             $multi->handlesActivity[$id][] = new InformationalChunk($response->getStatus(), $response->getHeaders());
             $multi->openHandles[$id]->complete();

@@ -215,7 +215,7 @@ class LintCommand extends Command
     {
         $errors = 0;
 
-        array_walk($filesInfo, static function (&$v) use (&$errors) {
+        array_walk($filesInfo, static function (&$v) use (&$errors): void {
             $v['file'] = (string) $v['file'];
             unset($v['template']);
             if (!$v['valid']) {

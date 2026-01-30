@@ -46,7 +46,7 @@ final class StreamerDumper
         if ($this->cacheFactory) {
             $this->cacheFactory->cache(
                 $path,
-                function (ConfigCacheInterface $cache) use ($generateContent, $type) {
+                function (ConfigCacheInterface $cache) use ($generateContent, $type): void {
                     $resourceClasses = $this->getResourceClassNames($type);
                     $cache->write(
                         $generateContent(),

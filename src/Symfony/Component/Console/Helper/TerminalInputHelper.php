@@ -118,7 +118,7 @@ final class TerminalInputHelper
         foreach ($this->targetSignals as $signal) {
             $this->signalHandlers[$signal] = pcntl_signal_get_handler($signal);
 
-            pcntl_signal($signal, function ($signal) {
+            pcntl_signal($signal, function ($signal): void {
                 // Save current state, then restore to initial state
                 $currentState = shell_exec('stty -g');
                 shell_exec('stty '.$this->initialState);

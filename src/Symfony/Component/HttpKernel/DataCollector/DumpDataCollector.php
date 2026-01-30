@@ -247,7 +247,7 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
     private function doDump(DataDumperInterface $dumper, Data $data, string $name, string $file, int $line, string $label): void
     {
         if ($dumper instanceof CliDumper) {
-            $contextDumper = function ($name, $file, $line, $fmt, $label) {
+            $contextDumper = function ($name, $file, $line, $fmt, $label): void {
                 $this->line = '' !== $label ? $this->style('meta', $label).' in ' : '';
 
                 if ($this instanceof HtmlDumper) {

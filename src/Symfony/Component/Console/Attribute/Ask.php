@@ -69,7 +69,7 @@ class Ask implements InteractiveAttributeInterface
             throw new LogicException(\sprintf('The %s "$%s" of "%s" must have a named type. Untyped, Union or Intersection types are not supported for interactive questions.', $reflection->getMemberName(), $name, $reflection->getSourceName()));
         }
 
-        $self->closure = function (SymfonyStyle $io, InputInterface $input) use ($self, $reflection, $name, $type) {
+        $self->closure = function (SymfonyStyle $io, InputInterface $input) use ($self, $reflection, $name, $type): void {
             if ($reflection->isProperty() && isset($this->{$reflection->getName()})) {
                 return;
             }

@@ -89,7 +89,7 @@ $getEnvVar = static function ($name, $default = false) use ($argv) {
     return $default;
 };
 
-$passthruOrFail = static function ($command) {
+$passthruOrFail = static function ($command): void {
     passthru($command, $status);
 
     if ($status) {

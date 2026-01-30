@@ -137,7 +137,7 @@ class HttpFoundationFactory implements HttpFoundationFactoryInterface
 
     private function createStreamedResponseCallback(StreamInterface $body): callable
     {
-        return function () use ($body) {
+        return function () use ($body): void {
             if ($body->isSeekable()) {
                 $body->rewind();
             }

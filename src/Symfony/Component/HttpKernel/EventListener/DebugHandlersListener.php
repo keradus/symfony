@@ -68,7 +68,7 @@ class DebugHandlersListener implements EventSubscriberInterface
                 if (method_exists($kernel = $event->getKernel(), 'terminateWithException')) {
                     $request = $event->getRequest();
                     $hasRun = &$this->hasTerminatedWithException;
-                    $this->exceptionHandler = static function (\Throwable $e) use ($kernel, $request, &$hasRun) {
+                    $this->exceptionHandler = static function (\Throwable $e) use ($kernel, $request, &$hasRun): void {
                         if ($hasRun) {
                             throw $e;
                         }
@@ -82,7 +82,7 @@ class DebugHandlersListener implements EventSubscriberInterface
                 if ($output instanceof ConsoleOutputInterface) {
                     $output = $output->getErrorOutput();
                 }
-                $this->exceptionHandler = static function (\Throwable $e) use ($app, $output) {
+                $this->exceptionHandler = static function (\Throwable $e) use ($app, $output): void {
                     $app->renderThrowable($e, $output);
                 };
             }

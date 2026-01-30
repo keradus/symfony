@@ -69,7 +69,7 @@ final class RegisterAutoconfigureAttributesPass implements CompilerPassInterface
         $parseDefinitions = new \ReflectionMethod(YamlFileLoader::class, 'parseDefinitions');
         $yamlLoader = $parseDefinitions->getDeclaringClass()->newInstanceWithoutConstructor();
 
-        self::$registerForAutoconfiguration = static function (ContainerBuilder $container, \ReflectionClass $class, \ReflectionAttribute $attribute) use ($parseDefinitions, $yamlLoader) {
+        self::$registerForAutoconfiguration = static function (ContainerBuilder $container, \ReflectionClass $class, \ReflectionAttribute $attribute) use ($parseDefinitions, $yamlLoader): void {
             $attribute = (array) $attribute->newInstance();
 
             foreach (['tags', 'resourceTags'] as $type) {

@@ -34,7 +34,7 @@ class Request
         protected array $server = [],
         protected ?string $content = null,
     ) {
-        array_walk_recursive($parameters, static function (&$value) {
+        array_walk_recursive($parameters, static function (&$value): void {
             $value = (string) $value;
         });
 

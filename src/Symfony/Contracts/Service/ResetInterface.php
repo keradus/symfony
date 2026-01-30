@@ -29,5 +29,5 @@ interface ResetInterface
     /**
      * @return void
      */
-    public function reset();
+    public function reset(): void;
 }

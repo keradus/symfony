@@ -292,7 +292,7 @@ class Connection
             $this->setupExchangeAndQueues(); // also setup normal exchange for delayed messages so delay queue can DLX messages to it
         }
 
-        $this->withConnectionExceptionRetry(function () use ($body, $headers, $delayInMs, $amqpStamp) {
+        $this->withConnectionExceptionRetry(function () use ($body, $headers, $delayInMs, $amqpStamp): void {
             if (0 < $delayInMs) {
                 $this->publishWithDelay($body, $headers, $delayInMs, $amqpStamp);
 

@@ -67,7 +67,7 @@ trait RedisTrait
 
         if ($redis instanceof \Predis\ClientInterface && $redis->getOptions()->exceptions) {
             $options = clone $redis->getOptions();
-            \Closure::bind(function () { $this->options['exceptions'] = false; }, $options, $options)();
+            \Closure::bind(function (): void { $this->options['exceptions'] = false; }, $options, $options)();
             $redis = new $redis($redis->getConnection(), $options);
         }
 
@@ -297,7 +297,7 @@ trait RedisTrait
                     }
                     @$redis->{$connect}($host, $port, (float) $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...\defined('Redis::SCAN_PREFIX') || !$isRedisExt ? [$extra] : []);
 
-                    set_error_handler(static function ($type, $msg) use (&$error) { $error = $msg; });
+                    set_error_handler(static function ($type, $msg) use (&$error): void { $error = $msg; });
                     try {
                         $isConnected = $redis->isConnected();
                     } finally {
@@ -364,10 +364,8 @@ trait RedisTrait
 
                     foreach ($context as $name => $value) {
                         match ($name) {
-                            'use-cache', 'client-tracking', 'throw-on-error', 'client-invalidations', 'reply-literal', 'persistent',
-                                => $context[$name] = filter_var($value, \FILTER_VALIDATE_BOOLEAN),
-                            'max-retries', 'serializer', 'compression', 'compression-level',
-                                => $context[$name] = filter_var($value, \FILTER_VALIDATE_INT),
+                            'use-cache', 'client-tracking', 'throw-on-error', 'client-invalidations', 'reply-literal', 'persistent', => $context[$name] = filter_var($value, \FILTER_VALIDATE_BOOLEAN),
+                            'max-retries', 'serializer', 'compression', 'compression-level', => $context[$name] = filter_var($value, \FILTER_VALIDATE_INT),
                             default => null,
                         };
                     }
@@ -695,7 +693,7 @@ trait RedisTrait
                 $ids[] = 'eval' === $command ? ($redis instanceof \Predis\ClientInterface ? $args[2] : $args[1][0]) : $args[0];
             }
         } elseif ($redis instanceof \Predis\ClientInterface) {
-            $results = $redis->pipeline(static function ($redis) use ($generator, &$ids) {
+            $results = $redis->pipeline(static function ($redis) use ($generator, &$ids): void {
                 foreach ($generator() as $command => $args) {
                     $redis->{$command}(...$args);
                     $ids[] = 'eval' === $command ? $args[2] : $args[0];
@@ -772,8 +770,7 @@ trait RedisTrait
     {
         foreach ($options as $name => $value) {
             match ($name) {
-                'allow_self_signed', 'capture_peer_cert', 'capture_peer_cert_chain', 'disable_compression', 'SNI_enabled', 'verify_peer', 'verify_peer_name',
-                    => $options[$name] = filter_var($value, \FILTER_VALIDATE_BOOLEAN),
+                'allow_self_signed', 'capture_peer_cert', 'capture_peer_cert_chain', 'disable_compression', 'SNI_enabled', 'verify_peer', 'verify_peer_name', => $options[$name] = filter_var($value, \FILTER_VALIDATE_BOOLEAN),
                 default => null,
             };
         }

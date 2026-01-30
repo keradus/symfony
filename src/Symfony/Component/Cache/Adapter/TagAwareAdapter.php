@@ -80,7 +80,7 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
             CacheItem::class
         );
         self::$setTagVersions ??= \Closure::bind(
-            static function (array $items, array $tagVersions) {
+            static function (array $items, array $tagVersions): void {
                 foreach ($items as $item) {
                     $item->newMetadata[CacheItem::METADATA_TAGS] = array_intersect_key($tagVersions, $item->newMetadata[CacheItem::METADATA_TAGS] ?? []);
                 }

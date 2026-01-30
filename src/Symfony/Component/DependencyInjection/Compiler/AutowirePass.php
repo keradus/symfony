@@ -412,7 +412,7 @@ class AutowirePass extends AbstractRecursivePass
                 } else {
                     $arguments[$index] = new TypedReference($this->decoratedId, $this->decoratedClass);
                     $argumentAtIndex = &$arguments[$index];
-                    $this->restorePreviousValue = static function () use (&$argumentAtIndex, $getValue) {
+                    $this->restorePreviousValue = static function () use (&$argumentAtIndex, $getValue): void {
                         $argumentAtIndex = $getValue();
                     };
 

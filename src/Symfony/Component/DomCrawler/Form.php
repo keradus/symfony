@@ -154,7 +154,7 @@ class Form extends Link implements \ArrayAccess
 
                 array_walk_recursive(
                     $expandedValue,
-                    static function (&$value, $key) {
+                    static function (&$value, $key): void {
                         if (ctype_digit($value) && ('size' === $key || 'error' === $key)) {
                             $value = (int) $value;
                         }

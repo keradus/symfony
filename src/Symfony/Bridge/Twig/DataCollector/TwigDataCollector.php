@@ -56,7 +56,7 @@ class TwigDataCollector extends DataCollector implements LateDataCollectorInterf
             return;
         }
 
-        $templateFinder = function (Profile $profile) use (&$templateFinder) {
+        $templateFinder = function (Profile $profile) use (&$templateFinder): void {
             if ($profile->isTemplate()) {
                 try {
                     $template = $this->twig->load($name = $profile->getName());

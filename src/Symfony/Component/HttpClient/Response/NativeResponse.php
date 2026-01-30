@@ -76,11 +76,11 @@ final class NativeResponse implements ResponseInterface, StreamableInterface
         $this->initializer = static fn (self $response) => null === $response->remaining;
 
         $pauseExpiry = &$this->pauseExpiry;
-        $info['pause_handler'] = static function (float $duration) use (&$pauseExpiry) {
+        $info['pause_handler'] = static function (float $duration) use (&$pauseExpiry): void {
             $pauseExpiry = 0 < $duration ? hrtime(true) / 1E9 + $duration : 0;
         };
 
-        $this->canary = new Canary(static function () use ($multi, $id) {
+        $this->canary = new Canary(static function () use ($multi, $id): void {
             if (null !== ($host = $multi->openHandles[$id][6] ?? null) && isset($multi->hosts[$host]) && 0 >= --$multi->hosts[$host]) {
                 unset($multi->hosts[$host]);
             }
@@ -120,7 +120,7 @@ final class NativeResponse implements ResponseInterface, StreamableInterface
     {
         $url = $this->url;
 
-        set_error_handler(function ($type, $msg) use (&$url) {
+        set_error_handler(function ($type, $msg) use (&$url): void {
             if (\E_NOTICE !== $type || 'fopen(): Content-type not specified assuming application/x-www-form-urlencoded' !== $msg) {
                 throw new TransportException($msg);
             }

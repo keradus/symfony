@@ -100,7 +100,7 @@ final class CurlResponse implements ResponseInterface, StreamableInterface
         }
 
         $execCounter = $multi->execCounter;
-        $this->info['pause_handler'] = static function (float $duration) use ($ch, $multi, $execCounter) {
+        $this->info['pause_handler'] = static function (float $duration) use ($ch, $multi, $execCounter): void {
             if (0 < $duration) {
                 if ($execCounter === $multi->execCounter) {
                     curl_multi_remove_handle($multi->handle, $ch);
@@ -176,7 +176,7 @@ final class CurlResponse implements ResponseInterface, StreamableInterface
         $multi->openHandles[$id] = [$ch, $options];
         curl_multi_add_handle($multi->handle, $ch);
 
-        $this->canary = new Canary(static function () use ($ch, $multi, $id) {
+        $this->canary = new Canary(static function () use ($ch, $multi, $id): void {
             unset($multi->pauseExpiries[$id], $multi->openHandles[$id], $multi->handlesActivity[$id]);
             curl_setopt($ch, \CURLOPT_PRIVATE, '_0');
 

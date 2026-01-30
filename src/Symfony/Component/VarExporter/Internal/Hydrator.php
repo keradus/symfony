@@ -54,7 +54,7 @@ class Hydrator
 
     public static function getHydrator($class)
     {
-        $baseHydrator = self::$hydrators['stdClass'] ??= static function ($properties, $objects) {
+        $baseHydrator = self::$hydrators['stdClass'] ??= static function ($properties, $objects): void {
             foreach ($properties as $name => $values) {
                 foreach ($values as $i => $v) {
                     $objects[$i]->$name = $v;
@@ -75,7 +75,7 @@ class Hydrator
                 });
 
             case 'SplObjectStorage':
-                return static function ($properties, $objects) {
+                return static function ($properties, $objects): void {
                     foreach ($properties as $name => $values) {
                         if ("\0" === $name) {
                             foreach ($values as $i => $v) {
@@ -102,7 +102,7 @@ class Hydrator
             case 'ArrayObject':
                 $constructor = $classReflector->getConstructor()->invokeArgs(...);
 
-                return static function ($properties, $objects) use ($constructor) {
+                return static function ($properties, $objects) use ($constructor): void {
                     foreach ($properties as $name => $values) {
                         if ("\0" !== $name) {
                             foreach ($values as $i => $v) {
@@ -135,7 +135,7 @@ class Hydrator
             return $baseHydrator;
         }
 
-        return static function ($properties, $objects) use ($propertySetters) {
+        return static function ($properties, $objects) use ($propertySetters): void {
             foreach ($properties as $name => $values) {
                 if ($setValue = $propertySetters[$name] ?? null) {
                     foreach ($values as $i => $v) {
@@ -152,7 +152,7 @@ class Hydrator
 
     public static function getSimpleHydrator($class)
     {
-        $baseHydrator = self::$simpleHydrators['stdClass'] ??= (function ($properties, $object) {
+        $baseHydrator = self::$simpleHydrators['stdClass'] ??= (function ($properties, $object): void {
             $notByRef = (array) $this;
 
             foreach ($properties as $name => &$value) {
@@ -180,7 +180,7 @@ class Hydrator
                 });
 
             case 'SplObjectStorage':
-                return static function ($properties, $object) {
+                return static function ($properties, $object): void {
                     foreach ($properties as $name => &$value) {
                         if ("\0" !== $name) {
                             $object->$name = $value;
@@ -204,7 +204,7 @@ class Hydrator
             case 'ArrayObject':
                 $constructor = $classReflector->getConstructor()->invokeArgs(...);
 
-                return static function ($properties, $object) use ($constructor) {
+                return static function ($properties, $object) use ($constructor): void {
                     foreach ($properties as $name => &$value) {
                         if ("\0" === $name) {
                             $constructor($object, $value);
@@ -247,7 +247,7 @@ class Hydrator
             return $baseHydrator;
         }
 
-        return static function ($properties, $object) use ($propertySetters) {
+        return static function ($properties, $object) use ($propertySetters): void {
             foreach ($properties as $name => &$value) {
                 if ($setValue = $propertySetters[$name] ?? null) {
                     $setValue($object, $value);

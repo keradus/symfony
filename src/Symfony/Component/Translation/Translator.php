@@ -293,7 +293,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface, LocaleA
 
         $this->assertValidLocale($locale);
         $cache = $this->getConfigCacheFactory()->cache($this->getCatalogueCachePath($locale),
-            function (ConfigCacheInterface $cache) use ($locale) {
+            function (ConfigCacheInterface $cache) use ($locale): void {
                 $this->dumpCatalogue($locale, $cache);
             }
         );

@@ -273,7 +273,7 @@ class UrlGenerator implements UrlGeneratorInterface, ConfigurableRequirementsInt
         $extra = array_udiff_assoc(array_diff_key($parameters, $variables), $defaults, static fn ($a, $b) => $a == $b ? 0 : 1);
         $extra = array_replace($extra, $queryParameters);
 
-        array_walk_recursive($extra, $caster = static function (&$v) use (&$caster) {
+        array_walk_recursive($extra, $caster = static function (&$v) use (&$caster): void {
             if (\is_object($v)) {
                 if ($vars = get_object_vars($v)) {
                     array_walk_recursive($vars, $caster);

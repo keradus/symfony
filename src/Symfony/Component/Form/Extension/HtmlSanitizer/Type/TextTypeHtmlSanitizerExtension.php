@@ -55,7 +55,7 @@ class TextTypeHtmlSanitizerExtension extends AbstractTypeExtension
 
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,
-            static function (FormEvent $event) use ($sanitizers, $sanitizer) {
+            static function (FormEvent $event) use ($sanitizers, $sanitizer): void {
                 if (\is_scalar($data = $event->getData()) && '' !== trim($data)) {
                     $event->setData($sanitizers->get($sanitizer)->sanitize($data));
                 }
